@@ -3025,3 +3025,519 @@ body {
     padding: 25px;
   }
 }
+
+
+/* PODH HOMEPAGE SHOWCASE V1 */
+.podh-showcase-section {
+  position: relative;
+}
+
+.podh-showcase-heading {
+  max-width: 760px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.podh-showcase-heading h2,
+.podh-testimonial-intro h2 {
+  margin: 10px 0 14px;
+  font-family: var(--font-podh-display), sans-serif;
+  font-size: clamp(2.35rem, 5vw, 4.7rem);
+  font-weight: 700;
+  line-height: .92;
+  letter-spacing: -.018em;
+  text-wrap: balance;
+}
+
+.podh-showcase-heading p,
+.podh-testimonial-intro p {
+  margin: 0;
+  color: var(--podh-muted);
+  font-size: .96rem;
+  line-height: 1.75;
+}
+
+.podh-showcase-heading p {
+  max-width: 680px;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+.podh-facilitators-section {
+  overflow: hidden;
+  padding: 104px 0;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(242,183,25,.12), transparent 34%),
+    linear-gradient(180deg, #fff 0%, #f8f5e9 100%);
+}
+
+.podh-facilitators-section::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  left: -360px;
+  bottom: -260px;
+  border: 1px solid rgba(157,107,0,.10);
+  border-radius: 50%;
+}
+
+.podh-facilitator-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.podh-facilitator-card {
+  overflow: hidden;
+  border: 1px solid #e4dfd0;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(18,18,18,.09);
+}
+
+.podh-facilitator-visual {
+  min-height: 225px;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(242,183,25,.22), transparent 33%),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,255,255,.028) 0 1px,
+      transparent 1px 15px
+    ),
+    linear-gradient(145deg, #272319 0%, #101010 58%, #050505 100%);
+}
+
+.podh-facilitator-mark {
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(242,183,25,.9);
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+  color: var(--podh-gold);
+  font-family: var(--font-podh-display), sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  box-shadow:
+    0 0 0 12px rgba(242,183,25,.05),
+    0 20px 35px rgba(0,0,0,.35);
+}
+
+.podh-facilitator-body {
+  min-height: 182px;
+  padding: 22px;
+}
+
+.podh-facilitator-body > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: var(--podh-soft-gold);
+  color: var(--podh-gold-deep);
+  font-size: .59rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.podh-facilitator-body h3 {
+  margin: 14px 0 8px;
+  font-size: 1.18rem;
+  line-height: 1.08;
+}
+
+.podh-facilitator-body p {
+  margin: 0;
+  color: var(--podh-muted);
+  font-size: .76rem;
+  line-height: 1.62;
+}
+
+.podh-partner-section {
+  overflow: hidden;
+  padding: 104px 0;
+  color: #fff;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(242,183,25,.23), transparent 30%),
+    linear-gradient(135deg, #0a0a0a 0%, #17140d 62%, #2a2108 100%);
+}
+
+.podh-partner-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .55;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.podh-partner-section .podh-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.podh-showcase-heading-dark p {
+  color: #c9c5b9;
+}
+
+.podh-partner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.podh-partner-card {
+  min-height: 205px;
+  padding: 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 24px;
+  background: rgba(255,255,255,.07);
+  backdrop-filter: blur(12px);
+}
+
+.podh-partner-logo-slot {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(242,183,25,.48);
+  border-radius: 17px;
+  background: rgba(242,183,25,.08);
+  color: var(--podh-gold);
+  font-family: var(--font-podh-display), sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+
+.podh-partner-card h3 {
+  margin: 25px 0 7px;
+  font-size: 1.12rem;
+}
+
+.podh-partner-card p {
+  margin: 0;
+  color: #c9c5b9;
+  font-size: .75rem;
+  line-height: 1.58;
+}
+
+.podh-partner-card div:last-child > span {
+  display: block;
+  margin-top: 14px;
+  color: var(--podh-gold);
+  font-size: .55rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.podh-testimonial-section {
+  padding: 104px 0;
+  background: #f5f4ef;
+}
+
+.podh-testimonial-layout {
+  display: grid;
+  grid-template-columns: .72fr 1.28fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.podh-testimonial-intro h2 {
+  max-width: 520px;
+}
+
+.podh-testimonial-card {
+  position: relative;
+  min-height: 330px;
+  padding: 42px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #e0ddd3;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(17,17,17,.09);
+}
+
+.podh-testimonial-card::after {
+  content: "PODH";
+  position: absolute;
+  right: -5px;
+  bottom: -26px;
+  color: rgba(242,183,25,.08);
+  font-size: 7.5rem;
+  font-weight: 1000;
+  letter-spacing: -.07em;
+}
+
+.podh-quote-mark {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--podh-soft-gold);
+  color: var(--podh-gold-deep);
+  font-family: Georgia, serif;
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
+.podh-testimonial-card blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 30px 0 28px;
+  max-width: 700px;
+  font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.podh-testimonial-meta {
+  position: relative;
+  z-index: 1;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid #ece8dd;
+}
+
+.podh-testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--podh-dark);
+  color: var(--podh-gold);
+  font-weight: 900;
+}
+
+.podh-testimonial-meta strong,
+.podh-testimonial-meta span {
+  display: block;
+}
+
+.podh-testimonial-meta span {
+  margin-top: 3px;
+  color: var(--podh-muted);
+  font-size: .7rem;
+}
+
+.podh-faq-showcase {
+  padding: 104px 0 112px;
+  background: #fff;
+}
+
+.podh-faq-showcase-list {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.podh-faq-showcase-list .faq-list {
+  display: grid;
+  gap: 12px;
+  border-top: 0;
+}
+
+.podh-faq-showcase-list .faq-item {
+  overflow: hidden;
+  border: 1px solid #ded9ca;
+  border-radius: 18px;
+  background: #f8f6ef;
+}
+
+.podh-faq-showcase-list .faq-item button {
+  min-height: 72px;
+  padding: 20px 22px;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.podh-faq-showcase-list .faq-item button span {
+  font-size: .91rem;
+  font-weight: 850;
+}
+
+.podh-faq-showcase-list .faq-item button strong {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--podh-dark);
+  color: var(--podh-gold);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.podh-faq-showcase-list .faq-item p {
+  margin: -4px 22px 22px;
+  padding-right: 45px;
+  color: var(--podh-muted);
+  font-size: .82rem;
+  line-height: 1.7;
+}
+
+@media (hover: hover) {
+  .podh-facilitator-card,
+  .podh-partner-card {
+    transition:
+      transform .24s ease,
+      box-shadow .24s ease,
+      border-color .24s ease;
+  }
+
+  .podh-facilitator-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(157,107,0,.25);
+    box-shadow: 0 25px 58px rgba(18,18,18,.13);
+  }
+
+  .podh-partner-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(242,183,25,.40);
+  }
+}
+
+@media (max-width: 980px) {
+  .podh-facilitator-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .podh-partner-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .podh-testimonial-layout {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .podh-testimonial-intro {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 640px) {
+  .podh-facilitators-section,
+  .podh-partner-section,
+  .podh-testimonial-section,
+  .podh-faq-showcase {
+    padding: 76px 0;
+  }
+
+  .podh-showcase-heading {
+    margin-bottom: 30px;
+  }
+
+  .podh-showcase-heading h2,
+  .podh-testimonial-intro h2 {
+    font-size: 2.65rem;
+  }
+
+  .podh-showcase-heading p,
+  .podh-testimonial-intro p {
+    font-size: .86rem;
+  }
+
+  .podh-facilitator-grid {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-right: -20px;
+    padding-right: 20px;
+  }
+
+  .podh-facilitator-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .podh-facilitator-card {
+    min-width: min(82vw, 310px);
+    scroll-snap-align: start;
+  }
+
+  .podh-facilitator-visual {
+    min-height: 205px;
+  }
+
+  .podh-partner-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .podh-partner-card {
+    min-height: 180px;
+    padding: 17px;
+    border-radius: 20px;
+  }
+
+  .podh-partner-card h3 {
+    margin-top: 22px;
+    font-size: .96rem;
+  }
+
+  .podh-partner-card p {
+    font-size: .68rem;
+  }
+
+  .podh-partner-card div:last-child > span {
+    font-size: .51rem;
+  }
+
+  .podh-testimonial-card {
+    min-height: 350px;
+    padding: 26px;
+    border-radius: 24px;
+  }
+
+  .podh-testimonial-card::after {
+    font-size: 5.6rem;
+  }
+
+  .podh-testimonial-card blockquote {
+    font-size: 1.15rem;
+  }
+
+  .podh-faq-showcase-list .faq-item button {
+    min-height: 68px;
+    padding: 18px;
+  }
+
+  .podh-faq-showcase-list .faq-item button span {
+    font-size: .82rem;
+  }
+
+  .podh-faq-showcase-list .faq-item p {
+    margin: -2px 18px 20px;
+    padding-right: 18px;
+    font-size: .77rem;
+  }
+}

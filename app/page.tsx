@@ -157,44 +157,147 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="kegiatan" className="podh-section podh-activities">
+        {/* PODH HOMEPAGE SHOWCASE V1 */}
+        <section
+          id="kegiatan"
+          className="podh-showcase-section podh-facilitators-section"
+        >
           <div className="podh-shell">
-            <div className="podh-section-heading podh-section-heading-center">
-              <span className="eyebrow">KEGIATAN PODH</span>
-              <h2>Dokumentasi akan tumbuh bersama kegiatan nyata.</h2>
+            <div className="podh-showcase-heading">
+              <span className="eyebrow">INSTRUKTUR & FASILITATOR</span>
+              <h2>Belajar dari tenaga yang tepat.</h2>
               <p>
-                Foto kegiatan, instruktur, testimoni, dan partner tidak
-                ditampilkan sebagai data fiktif. Bagian ini siap diisi setelah
-                kegiatan resmi berjalan.
+                Profil instruktur ditampilkan saat nama, kompetensi, dan perannya
+                pada batch telah ditetapkan secara resmi.
               </p>
             </div>
 
-            <div className="activity-preview-grid">
-              <div>
-                <strong>Pelatihan</strong>
-                <span>Dokumentasi batch</span>
-              </div>
-              <div>
-                <strong>Keselamatan</strong>
-                <span>Edukasi lapangan</span>
-              </div>
-              <div>
-                <strong>Organisasi</strong>
-                <span>Agenda & kegiatan</span>
-              </div>
+            <div className="podh-facilitator-grid">
+              {[
+                {
+                  code: "WLD",
+                  title: "Instruktur Welder",
+                  meta: "Pengelasan",
+                  description:
+                    "Profil instruktur, pengalaman, dan lingkup kompetensi akan tampil pada batch resmi.",
+                },
+                {
+                  code: "K3",
+                  title: "Fasilitator K3",
+                  meta: "Keselamatan Kerja",
+                  description:
+                    "Nama fasilitator dan ruang lingkup materi akan diumumkan bersama detail pelatihan.",
+                },
+                {
+                  code: "CRN",
+                  title: "Instruktur Operator Crane",
+                  meta: "Operasi Alat",
+                  description:
+                    "Kompetensi instruktur akan dicantumkan setelah jadwal dan penyelenggara ditetapkan.",
+                },
+                {
+                  code: "RIG",
+                  title: "Instruktur Rigger",
+                  meta: "Rigging & Lifting",
+                  description:
+                    "Profil pengajar akan tampil ketika batch rigging dan lifting dibuka secara resmi.",
+                },
+              ].map((item) => (
+                <article className="podh-facilitator-card" key={item.code}>
+                  <div className="podh-facilitator-visual">
+                    <div className="podh-facilitator-mark">{item.code}</div>
+                  </div>
+                  <div className="podh-facilitator-body">
+                    <span>{item.meta}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="podh-section podh-faq-section">
-          <div className="podh-shell faq-layout-v3">
-            <div>
-              <span className="eyebrow">PERTANYAAN UMUM</span>
-              <h2>Informasi dasar sebelum mendaftar.</h2>
+        <section className="podh-showcase-section podh-partner-section">
+          <div className="podh-shell">
+            <div className="podh-showcase-heading podh-showcase-heading-dark">
+              <span className="eyebrow eyebrow-light">MITRA PODH</span>
+              <h2>Kolaborasi yang bisa diverifikasi.</h2>
+              <p>
+                Nama dan logo mitra hanya ditampilkan setelah kerja sama,
+                penyelenggara, atau jalur sertifikasinya telah dikonfirmasi.
+              </p>
             </div>
-            <Faq />
+
+            <div className="podh-partner-grid">
+              {[
+                ["LP", "Lembaga Pelatihan", "Penyelenggara pelatihan resmi"],
+                ["LS", "Lembaga Sertifikasi", "Penerbit atau jalur sertifikasi"],
+                ["MI", "Mitra Industri", "Kolaborasi kebutuhan tenaga kerja"],
+                ["K3", "Keselamatan Kerja", "Pendukung kompetensi dan budaya K3"],
+                ["PK", "Partner Kompetensi", "Kolaborasi instruktur dan materi"],
+                ["KP", "Komunitas & Pendukung", "Ekosistem kegiatan PODH"],
+              ].map(([code, title, description]) => (
+                <article className="podh-partner-card" key={title}>
+                  <div className="podh-partner-logo-slot">{code}</div>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    <span>DITAMPILKAN SETELAH RESMI</span>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
+
+        <section className="podh-showcase-section podh-testimonial-section">
+          <div className="podh-shell podh-testimonial-layout">
+            <div className="podh-testimonial-intro">
+              <span className="eyebrow">SUARA PESERTA</span>
+              <h2>Testimoni dari pengalaman nyata.</h2>
+              <p>
+                Testimoni tidak dibuat sebagai contoh fiktif. Bagian ini sudah
+                disiapkan dan akan diisi setelah peserta benar-benar menyelesaikan
+                program PODH.
+              </p>
+            </div>
+
+            <article className="podh-testimonial-card">
+              <div className="podh-quote-mark">“</div>
+              <blockquote>
+                Pengalaman peserta, hasil pelatihan, dan kesan terhadap program
+                akan ditampilkan di sini setelah mendapat persetujuan untuk
+                dipublikasikan.
+              </blockquote>
+              <div className="podh-testimonial-meta">
+                <div className="podh-testimonial-avatar">P</div>
+                <div>
+                  <strong>Peserta PODH</strong>
+                  <span>Menunggu batch pertama selesai</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section className="podh-showcase-section podh-faq-section podh-faq-showcase">
+          <div className="podh-shell">
+            <div className="podh-showcase-heading">
+              <span className="eyebrow">FAQ</span>
+              <h2>Pertanyaan yang sering ditanyakan.</h2>
+              <p>
+                Informasi dasar mengenai keanggotaan, program, pendaftaran,
+                sertifikasi, dan permintaan pelatihan.
+              </p>
+            </div>
+
+            <div className="podh-faq-showcase-list">
+              <Faq />
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <AppFooter />
