@@ -1,6 +1,20 @@
 import type { Metadata } from "next";
+import { Barlow_Condensed, Manrope } from "next/font/google";
 import "./globals.css";
 import "./podh.css";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-podh-sans",
+  display: "swap",
+});
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-podh-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -26,7 +40,7 @@ type RootLayoutProps = Readonly<{
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="id">
-      <body>{children}</body>
+      <body className={`${manrope.variable} ${barlowCondensed.variable}`}>{children}</body>
     </html>
   );
 }
