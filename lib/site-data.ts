@@ -45,7 +45,7 @@ export const siteData = {
     {
       question: "Bagaimana pendaftaran dilakukan?",
       answer:
-        "Peserta memilih pelatihan, membaca detail batch, lalu mengisi formulir pendaftaran melalui situs. Saat backend produksi belum aktif, formulir hanya digunakan sebagai simulasi antarmuka dan tidak menyimpan dokumen.",
+        "Pengguna terlebih dahulu mendaftar sebagai anggota PODH. Setelah keanggotaan diverifikasi dan akun aktif, anggota dapat memilih program, membaca detail batch, lalu mendaftar program dari akun PODH.",
     },
     {
       question: "Bagaimana dengan permintaan pelatihan dari perusahaan?",

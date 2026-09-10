@@ -11,7 +11,6 @@ import {
 } from "react-icons/fi";
 import { AppFooter } from "@/components/AppFooter";
 import { Header } from "@/components/Header";
-import { RegistrationForm } from "@/components/RegistrationForm";
 import {
   getStatusLabel,
   getTraining,
@@ -151,9 +150,9 @@ export default async function TrainingDetailPage({
               {canRegister ? (
                 <Link
                   className="podh-button podh-button-accent training-register-button"
-                  href="#daftar-program"
+                  href={`/anggota/masuk?next=/pelatihan/${training.slug}`}
                 >
-                  Daftar Program Ini
+                  Masuk Anggota untuk Daftar
                 </Link>
               ) : (
                 <button
@@ -176,75 +175,29 @@ export default async function TrainingDetailPage({
         </section>
 
         {canRegister && (
-          <section
-            id="daftar-program"
-            className="podh-section program-registration-section"
-          >
-            <div className="podh-shell">
-              <div className="program-registration-heading">
-                <span className="eyebrow">PENDAFTARAN PROGRAM</span>
-                <h2>Daftar {training.title}</h2>
-                <p>
-                  Form ini khusus untuk program yang sedang kamu lihat.
-                  Program tidak dapat diganti dari dalam formulir.
-                </p>
-              </div>
+          <section className="podh-section member-required-section">
+            <div className="podh-shell member-required-card">
+              <span className="eyebrow">KHUSUS ANGGOTA PODH</span>
+              <h2>Masuk sebagai anggota untuk mendaftar program.</h2>
+              <p>
+                Pendaftaran program hanya tersedia setelah akun PODH memiliki
+                status keanggotaan aktif.
+              </p>
 
-              <div className="program-registration-layout">
-                <RegistrationForm
-                  initialTrainingSlug={training.slug}
-                  lockedTraining
-                />
+              <div className="member-required-actions">
+                <Link
+                  className="podh-button podh-button-accent"
+                  href={`/anggota/masuk?next=/pelatihan/${training.slug}`}
+                >
+                  Masuk Akun Anggota
+                </Link>
 
-                <aside className="program-registration-progress">
-                  <span className="eyebrow">SETELAH MENDAFTAR</span>
-                  <h3>Pantau proses dari akun peserta.</h3>
-
-                  <ol>
-                    <li>
-                      <span>01</span>
-                      <div>
-                        <strong>Pendaftaran dikirim</strong>
-                        <small>Data masuk untuk diperiksa.</small>
-                      </div>
-                    </li>
-                    <li>
-                      <span>02</span>
-                      <div>
-                        <strong>Verifikasi dokumen</strong>
-                        <small>Admin memeriksa persyaratan peserta.</small>
-                      </div>
-                    </li>
-                    <li>
-                      <span>03</span>
-                      <div>
-                        <strong>Pembayaran</strong>
-                        <small>Muncul jika batch membutuhkan pembayaran.</small>
-                      </div>
-                    </li>
-                    <li>
-                      <span>04</span>
-                      <div>
-                        <strong>Pendaftaran diterima</strong>
-                        <small>Peserta siap mengikuti jadwal program.</small>
-                      </div>
-                    </li>
-                    <li>
-                      <span>05</span>
-                      <div>
-                        <strong>Pelatihan</strong>
-                        <small>Progres kegiatan dan evaluasi.</small>
-                      </div>
-                    </li>
-                    <li>
-                      <span>06</span>
-                      <div>
-                        <strong>Selesai</strong>
-                        <small>Status akhir dan sertifikat jika tersedia.</small>
-                      </div>
-                    </li>
-                  </ol>
-                </aside>
+                <Link
+                  className="podh-button podh-button-outline"
+                  href="/anggota/daftar"
+                >
+                  Daftar Anggota PODH
+                </Link>
               </div>
             </div>
           </section>

@@ -7,7 +7,7 @@ import { siteData } from "@/lib/site-data";
 
 const nav = [
   ["Beranda", "/"],
-  ["Daftar Pelatihan", "/pelatihan"],
+  ["Program", "/pelatihan"],
   ["Tentang PODH", "/#tentang"],
   ["Kegiatan", "/#kegiatan"],
   ["Permintaan", "/permintaan"],
@@ -37,19 +37,19 @@ export function Header() {
           ))}
 
           {accountEnabled && (
-            <Link className="podh-login-mobile" href="/masuk" onClick={() => setOpen(false)}>
+            <Link className="podh-login-mobile" href="/anggota/masuk" onClick={() => setOpen(false)}>
               <FiLogIn /> Masuk
             </Link>
           )}
         </nav>
 
         <div className="podh-header-actions">
-          <Link className="podh-header-cta" href="/daftar">
-            Pendaftaran
+          <Link className="podh-header-cta" href="/anggota/daftar">
+            Daftar Anggota
           </Link>
 
           {accountEnabled && (
-            <Link className="podh-login" href="/masuk">
+            <Link className="podh-login" href="/anggota/masuk">
               <FiLogIn />
               <span>Masuk</span>
             </Link>
