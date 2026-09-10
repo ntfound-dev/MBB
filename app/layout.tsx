@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./podh.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Muara Badak Bersatu",
-    template: "%s | Muara Badak Bersatu",
+    default: "PODH — Persatuan Operator, Driver, Helper",
+    template: "%s | PODH",
   },
   description:
-    "Pelatihan dan pengembangan kompetensi tenaga kerja lokal di Muara Badak, Kalimantan Timur.",
+    "PODH adalah organisasi pengembangan kompetensi tenaga kerja lapangan dan industri dengan program Welder, K3, Operator Crane, dan Rigger.",
   metadataBase: new URL("https://muara-badak-bersatu.vercel.app"),
   openGraph: {
-    title: "Muara Badak Bersatu",
+    title: "PODH — Persatuan Operator, Driver, Helper",
     description:
-      "Pelatihan dan pengembangan kompetensi tenaga kerja lokal di Muara Badak.",
+      "Pelatihan kompetensi tenaga kerja lapangan dan industri.",
     type: "website",
     locale: "id_ID",
   },

@@ -681,3 +681,36 @@
     width: 100%;
   }
 }
+
+/* === PODH admin rebrand === */
+.season-sidebar {
+  background: #0b0b0b;
+}
+
+.season-brand > span,
+.season-nav button.active small {
+  background: #f7b915;
+  color: #171717;
+}
+
+.season-nav button.active {
+  background: #2b2517;
+}
+
+.demo-dot {
+  background: #f7b915;
+}
+
+.season-top-actions > a,
+.program-overview-card > button {
+  color: #8b6000;
+}
+
+.privacy-box {
+  border-color: #e4d39c;
+  background: #fff8de;
+}
+
+.privacy-box > span {
+  background: #171717;
+}

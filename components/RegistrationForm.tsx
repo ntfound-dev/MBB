@@ -2,408 +2,280 @@
 
 import { useMemo, useState } from "react";
 import {
-  FiArrowLeft,
-  FiArrowRight,
   FiCheckCircle,
-  FiCreditCard,
-  FiDollarSign,
-  FiGrid,
+  FiFileText,
   FiShield,
+  FiUploadCloud,
+  FiX,
 } from "react-icons/fi";
+import { trainings } from "@/lib/training-data";
 
-const TOTAL_FEE = 7_500_000;
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
-const programs = [
-  { value: "welder", label: "Welder", code: "WEL" },
-  { value: "rigger", label: "Rigger", code: "RIG" },
-  { value: "k3", label: "K3", code: "K3" },
-] as const;
-
-type PaymentMethod = "qris" | "transfer" | "cash";
-type Step = "registration" | "payment" | "complete";
-
-const paymentMethods = [
-  {
-    value: "qris" as const,
-    title: "QRIS",
-    subtitle: "Pembayaran digital",
-    description:
-      "Scan QRIS resmi MBB. Saat sistem production aktif, status dapat diverifikasi otomatis.",
-    verification: "Verifikasi otomatis / sistem",
-    icon: FiGrid,
-  },
-  {
-    value: "transfer" as const,
-    title: "Transfer Bank",
-    subtitle: "Rekening resmi MBB",
-    description:
-      "Transfer penuh ke rekening resmi organisasi. Bukti pembayaran diverifikasi oleh admin.",
-    verification: "Verifikasi admin",
-    icon: FiCreditCard,
-  },
-  {
-    value: "cash" as const,
-    title: "Cash",
-    subtitle: "Bayar langsung",
-    description:
-      "Pembayaran penuh melalui petugas MBB yang berwenang dan peserta menerima kwitansi.",
-    verification: "Verifikasi petugas / admin",
-    icon: FiDollarSign,
-  },
-];
-
-function rupiah(value: number) {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
-  }).format(value);
+function digitsOnly(value: string) {
+  return value.replace(/\D/g, "");
 }
 
-export function RegistrationForm() {
-  const [step, setStep] = useState<Step>("registration");
-  const [registrationId, setRegistrationId] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [program, setProgram] = useState("welder");
-  const [domicile, setDomicile] = useState("");
-  const [paymentMethod, setPaymentMethod] =
-    useState<PaymentMethod>("qris");
+function formatFileSize(bytes: number) {
+  if (bytes < 1024 * 1024) {
+    return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+  }
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
 
-  const selectedProgram = useMemo(
-    () => programs.find((item) => item.value === program) ?? programs[0],
-    [program],
+export function RegistrationForm({
+  initialTrainingSlug = "",
+}: {
+  initialTrainingSlug?: string;
+}) {
+  const [trainingSlug, setTrainingSlug] = useState(
+    trainings.some((item) => item.slug === initialTrainingSlug)
+      ? initialTrainingSlug
+      : trainings[0]?.slug ?? "",
+  );
+  const [name, setName] = useState("");
+  const [nik, setNik] = useState("");
+  const [phone, setPhone] = useState("");
+  const [domicile, setDomicile] = useState("");
+  const [documentPdf, setDocumentPdf] = useState<File | null>(null);
+  const [fileError, setFileError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [registrationId, setRegistrationId] = useState("");
+
+  const training = useMemo(
+    () => trainings.find((item) => item.slug === trainingSlug) ?? trainings[0],
+    [trainingSlug],
   );
 
-  const selectedPayment =
-    paymentMethods.find((item) => item.value === paymentMethod) ??
-    paymentMethods[0];
+  function chooseFile(file: File | null) {
+    if (!file) {
+      setDocumentPdf(null);
+      setFileError("");
+      return;
+    }
 
-  function resetFlow() {
-    setStep("registration");
-    setRegistrationId("");
-    setPaymentMethod("qris");
+    if (file.type !== "application/pdf") {
+      setDocumentPdf(null);
+      setFileError("Dokumen harus berupa PDF.");
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      setDocumentPdf(null);
+      setFileError("Ukuran PDF maksimal 10 MB.");
+      return;
+    }
+
+    setDocumentPdf(file);
+    setFileError("");
   }
 
-  const stepNumber =
-    step === "registration" ? 1 : step === "payment" ? 2 : 3;
+  if (submitted) {
+    return (
+      <div className="registration-success">
+        <div className="registration-success-icon">
+          <FiCheckCircle />
+        </div>
+        <span className="eyebrow">SIMULASI PENDAFTARAN</span>
+        <h2>Data siap diverifikasi.</h2>
+        <p>
+          Form ini belum terhubung ke database produksi. Tidak ada NIK atau PDF
+          yang dikirim ke server pada simulasi ini.
+        </p>
 
-  return (
-    <div className="mbb-registration-flow">
-      <div className="mbb-stepper" aria-label="Tahapan pendaftaran">
-        {[
-          ["01", "Data Peserta"],
-          ["02", "Pembayaran"],
-          ["03", "Selesai"],
-        ].map(([number, label], index) => {
-          const current = index + 1;
-          const active = current === stepNumber;
-          const complete = current < stepNumber;
+        <div className="registration-summary">
+          <div>
+            <small>ID</small>
+            <strong>{registrationId}</strong>
+          </div>
+          <div>
+            <small>Pelatihan</small>
+            <strong>{training?.title ?? "-"}</strong>
+          </div>
+          <div>
+            <small>Peserta</small>
+            <strong>{name}</strong>
+          </div>
+          <div>
+            <small>Status</small>
+            <strong>Menunggu sistem produksi</strong>
+          </div>
+        </div>
 
-          return (
-            <div
-              key={number}
-              className={`mbb-step ${active ? "active" : ""} ${
-                complete ? "complete" : ""
-              }`}
-            >
-              <span>{complete ? <FiCheckCircle /> : number}</span>
-              <small>{label}</small>
-            </div>
-          );
-        })}
-      </div>
-
-      {step === "registration" && (
-        <form
-          className="registration-form mbb-flow-card"
-          onSubmit={(event) => {
-            event.preventDefault();
-
-            const suffix = String(Date.now()).slice(-5);
-            setRegistrationId(
-              `MBB-S1-${selectedProgram.code}-${suffix}`,
-            );
-            setStep("payment");
+        <button
+          type="button"
+          className="podh-button podh-button-dark"
+          onClick={() => {
+            setSubmitted(false);
+            setRegistrationId("");
           }}
         >
-          <div className="mbb-flow-heading">
-            <span>Season 1 • Pendaftaran Demo</span>
-            <h2>Data peserta</h2>
-            <p>
-              Isi data dasar untuk melihat simulasi alur pendaftaran MBB.
-              Data belum disimpan ke server.
-            </p>
+          Kembali ke Form
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      className="registration-form-v3"
+      onSubmit={(event) => {
+        event.preventDefault();
+
+        if (!documentPdf) {
+          setFileError("Satu PDF dokumen persyaratan wajib dipilih.");
+          return;
+        }
+
+        setRegistrationId(`PODH-${String(Date.now()).slice(-6)}`);
+        setSubmitted(true);
+      }}
+    >
+      <div className="registration-heading">
+        <span className="eyebrow">PENDAFTARAN PESERTA</span>
+        <h2>Lengkapi data pendaftaran.</h2>
+        <p>
+          Isi data sesuai identitas. Satu PDF dapat berisi KTP, KK, dan dokumen
+          pendukung lain yang diminta pada batch.
+        </p>
+      </div>
+
+      <div className="registration-fields">
+        <label className="field-full">
+          <span>Pelatihan</span>
+          <select
+            value={trainingSlug}
+            onChange={(event) => setTrainingSlug(event.target.value)}
+            required
+          >
+            {trainings.map((item) => (
+              <option key={item.slug} value={item.slug}>
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label>
+          <span>Nama Lengkap</span>
+          <input
+            required
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            placeholder="Sesuai identitas"
+            autoComplete="name"
+          />
+        </label>
+
+        <label>
+          <span>NIK</span>
+          <input
+            required
+            inputMode="numeric"
+            minLength={16}
+            maxLength={16}
+            pattern="[0-9]{16}"
+            value={nik}
+            onChange={(event) =>
+              setNik(digitsOnly(event.target.value).slice(0, 16))
+            }
+            placeholder="16 digit NIK"
+          />
+        </label>
+
+        <label>
+          <span>Nomor HP / WhatsApp</span>
+          <input
+            required
+            inputMode="tel"
+            minLength={10}
+            maxLength={15}
+            pattern="08[0-9]{8,13}"
+            value={phone}
+            onChange={(event) =>
+              setPhone(digitsOnly(event.target.value).slice(0, 15))
+            }
+            placeholder="08xxxxxxxxxx"
+            autoComplete="tel"
+          />
+        </label>
+
+        <label>
+          <span>Domisili</span>
+          <input
+            required
+            value={domicile}
+            onChange={(event) => setDomicile(event.target.value)}
+            placeholder="Domisili peserta"
+          />
+        </label>
+      </div>
+
+      <section className="document-upload">
+        <div className="document-upload-head">
+          <div>
+            <span className="eyebrow">DOKUMEN</span>
+            <h3>Satu file PDF</h3>
+            <p>KTP + KK + dokumen pendukung dalam satu PDF.</p>
           </div>
+          <small>PDF • Maks. 10 MB</small>
+        </div>
 
-          <div className="mbb-form-grid">
-            <label className="mbb-field-full">
-              <span>Season</span>
-              <input
-                value="Season 1 — Pelatihan Kompetensi 2026"
-                readOnly
-              />
-            </label>
-
-            <label>
-              <span>Program Pelatihan</span>
-              <select
-                value={program}
-                onChange={(event) => setProgram(event.target.value)}
-              >
-                {programs.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              <span>Nama Lengkap</span>
-              <input
-                required
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                placeholder="Contoh: Ahmad Maulana"
-              />
-            </label>
-
-            <label>
-              <span>Nomor WhatsApp</span>
-              <input
-                required
-                inputMode="tel"
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
-                placeholder="08xxxxxxxxxx"
-              />
-            </label>
-
-            <label>
-              <span>Domisili</span>
-              <input
-                required
-                value={domicile}
-                onChange={(event) => setDomicile(event.target.value)}
-                placeholder="Muara Badak / daerah sekitar"
-              />
-            </label>
+        {documentPdf ? (
+          <div className="document-selected">
+            <FiFileText />
+            <div>
+              <strong>{documentPdf.name}</strong>
+              <small>{formatFileSize(documentPdf.size)}</small>
+            </div>
+            <button
+              type="button"
+              aria-label="Hapus PDF"
+              onClick={() => chooseFile(null)}
+            >
+              <FiX />
+            </button>
           </div>
-
-          <label className="checkbox-row mbb-consent">
-            <input required type="checkbox" />
-            <span>
-              Saya memahami halaman ini masih demo dan belum menyimpan
-              data peserta.
-            </span>
+        ) : (
+          <label className="document-picker">
+            <FiUploadCloud />
+            <div>
+              <strong>Pilih PDF dokumen peserta</strong>
+              <small>File hanya dibaca lokal pada mode simulasi.</small>
+            </div>
+            <span>Pilih File</span>
+            <input
+              type="file"
+              accept=".pdf,application/pdf"
+              onChange={(event) =>
+                chooseFile(event.target.files?.[0] ?? null)
+              }
+            />
           </label>
+        )}
 
-          <button
-            className="button button-primary form-submit mbb-primary-action"
-            type="submit"
-          >
-            Lanjut ke Pembayaran
-            <FiArrowRight />
-          </button>
-        </form>
-      )}
+        {fileError && <p className="field-error">{fileError}</p>}
 
-      {step === "payment" && (
-        <div className="mbb-flow-card mbb-payment-card">
-          <div className="mbb-flow-heading">
-            <span>Pembayaran • Demo</span>
-            <h2>Pilih metode pembayaran</h2>
-            <p>
-              Pembayaran dilakukan penuh sesuai biaya program. Tidak ada
-              cicilan pada alur ini.
-            </p>
-          </div>
-
-          <div className="mbb-payment-reference">
-            <div>
-              <small>ID Pendaftaran</small>
-              <strong>{registrationId}</strong>
-            </div>
-            <div>
-              <small>Peserta</small>
-              <strong>{name}</strong>
-            </div>
-            <div>
-              <small>Program</small>
-              <strong>{selectedProgram.label}</strong>
-            </div>
-          </div>
-
-          <div className="mbb-payment-total">
-            <span>Total pembayaran</span>
-            <strong>{rupiah(TOTAL_FEE)}</strong>
-            <small>Pembayaran penuh • nominal sementara</small>
-          </div>
-
-          <div className="mbb-method-grid">
-            {paymentMethods.map((method) => {
-              const Icon = method.icon;
-              const active = paymentMethod === method.value;
-
-              return (
-                <button
-                  key={method.value}
-                  type="button"
-                  className={`mbb-method-card ${
-                    active ? "active" : ""
-                  }`}
-                  onClick={() => setPaymentMethod(method.value)}
-                >
-                  <span className="mbb-method-icon">
-                    <Icon />
-                  </span>
-                  <span className="mbb-method-copy">
-                    <strong>{method.title}</strong>
-                    <small>{method.subtitle}</small>
-                  </span>
-                  <span className="mbb-method-check">
-                    {active ? <FiCheckCircle /> : null}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="mbb-method-detail">
-            <div className="mbb-method-detail-copy">
-              <span className="mbb-method-detail-label">
-                Metode dipilih
-              </span>
-              <h3>{selectedPayment.title}</h3>
-              <p>{selectedPayment.description}</p>
-
-              <div className="mbb-verification-badge">
-                <FiShield />
-                <span>{selectedPayment.verification}</span>
-              </div>
-            </div>
-
-            {paymentMethod === "qris" && (
-              <div
-                className="mbb-qris-demo"
-                aria-label="QRIS demo tidak dapat dipindai"
-              >
-                <div className="mbb-qris-pattern" />
-                <strong>QRIS DEMO</strong>
-                <small>Tidak dapat dipindai</small>
-              </div>
-            )}
-
-            {paymentMethod === "transfer" && (
-              <div className="mbb-payment-placeholder">
-                <FiCreditCard />
-                <strong>Rekening belum ditetapkan</strong>
-                <small>
-                  Nomor rekening resmi baru ditampilkan setelah disetujui
-                  organisasi.
-                </small>
-              </div>
-            )}
-
-            {paymentMethod === "cash" && (
-              <div className="mbb-payment-placeholder">
-                <FiDollarSign />
-                <strong>Bayar melalui petugas MBB</strong>
-                <small>
-                  Pembayaran cash wajib dicatat dan disertai kwitansi.
-                </small>
-              </div>
-            )}
-          </div>
-
-          <div className="mbb-payment-actions">
-            <button
-              className="button button-secondary"
-              type="button"
-              onClick={() => setStep("registration")}
-            >
-              <FiArrowLeft />
-              Kembali
-            </button>
-
-            <button
-              className="button button-primary"
-              type="button"
-              onClick={() => setStep("complete")}
-            >
-              Lanjutkan Simulasi
-              <FiArrowRight />
-            </button>
-          </div>
-
-          <p className="mbb-payment-disclaimer">
-            Demo saja — tidak ada QRIS aktif, rekening bank, transaksi cash,
-            atau data pembayaran nyata yang diproses.
-          </p>
-        </div>
-      )}
-
-      {step === "complete" && (
-        <div className="mbb-flow-card mbb-complete-card">
-          <div className="mbb-complete-icon">
-            <FiCheckCircle />
-          </div>
-
-          <span className="mbb-complete-kicker">Simulasi selesai</span>
-          <h2>Pendaftaran siap diverifikasi.</h2>
+        <div className="privacy-note">
+          <FiShield />
           <p>
-            Dalam sistem production, pembayaran baru dianggap selesai
-            setelah tervalidasi oleh sistem atau admin MBB.
+            Sistem produksi harus menggunakan penyimpanan privat dan akses
+            terotorisasi untuk NIK dan dokumen peserta.
           </p>
-
-          <div className="mbb-complete-summary">
-            <div>
-              <small>ID Pendaftaran</small>
-              <strong>{registrationId}</strong>
-            </div>
-            <div>
-              <small>Peserta</small>
-              <strong>{name}</strong>
-            </div>
-            <div>
-              <small>Program</small>
-              <strong>{selectedProgram.label}</strong>
-            </div>
-            <div>
-              <small>Metode</small>
-              <strong>{selectedPayment.title}</strong>
-            </div>
-            <div>
-              <small>Total</small>
-              <strong>{rupiah(TOTAL_FEE)}</strong>
-            </div>
-            <div>
-              <small>Status</small>
-              <strong>Menunggu Verifikasi</strong>
-            </div>
-          </div>
-
-          <div className="mbb-complete-note">
-            <FiShield />
-            <div>
-              <strong>Belum ada transaksi nyata</strong>
-              <p>
-                Halaman ini hanya menggambarkan alur administrasi yang akan
-                digunakan saat sistem production aktif.
-              </p>
-            </div>
-          </div>
-
-          <button
-            className="button button-primary"
-            type="button"
-            onClick={resetFlow}
-          >
-            Buat Simulasi Baru
-          </button>
         </div>
-      )}
-    </div>
+      </section>
+
+      <label className="registration-consent">
+        <input type="checkbox" required />
+        <span>
+          Saya memahami form ini masih simulasi antarmuka dan belum menyimpan
+          data peserta ke server.
+        </span>
+      </label>
+
+      <button type="submit" className="podh-button podh-button-accent">
+        Kirim Pendaftaran
+      </button>
+    </form>
   );
 }

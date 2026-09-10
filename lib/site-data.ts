@@ -1,142 +1,56 @@
-export type TrainingProgram = {
-  slug: "welder" | "rigger" | "k3";
-  name: string;
-  short: string;
-  description: string;
-  topics: string[];
-};
-
 export const siteData = {
   organization: {
-    name: "Muara Badak Bersatu",
-    shortName: "MBB",
+    name: "Persatuan Operator, Driver, Helper",
+    shortName: "PODH",
     location: "Muara Badak, Kalimantan Timur",
-    tagline: "Pelatihan & Pengembangan Kompetensi Tenaga Kerja Lokal",
+    tagline: "Solid • Kompeten • Lebih Kuat Bersama",
+    description:
+      "Organisasi pengembangan kompetensi tenaga kerja lapangan dan industri.",
   },
-
-  programs: [
-    {
-      slug: "welder",
-      name: "Welder",
-      short: "Kompetensi pengelasan untuk lingkungan kerja industri.",
-      description:
-        "Program pelatihan yang membantu peserta memahami dasar kerja pengelasan, prosedur, disiplin teknis, serta aspek keselamatan dalam pelaksanaan pekerjaan.",
-      topics: [
-        "Dasar dan prosedur pengelasan",
-        "Pengenalan peralatan kerja",
-        "Keselamatan saat bekerja",
-        "Evaluasi hasil pelatihan",
-      ],
-    },
-    {
-      slug: "rigger",
-      name: "Rigger",
-      short: "Kesiapan kerja rigging dan pengangkatan beban.",
-      description:
-        "Program pelatihan yang membangun pemahaman mengenai rigging, penggunaan peralatan, komunikasi lapangan, prosedur pengangkatan, dan keselamatan kerja.",
-      topics: [
-        "Dasar rigging",
-        "Pengenalan lifting gear",
-        "Komunikasi lapangan",
-        "Prosedur keselamatan",
-      ],
-    },
-    {
-      slug: "k3",
-      name: "K3",
-      short: "Pemahaman keselamatan dan kesehatan kerja.",
-      description:
-        "Program yang membantu peserta membangun kesadaran risiko, memahami prosedur keselamatan, dan menerapkan budaya kerja yang lebih aman di lingkungan industri.",
-      topics: [
-        "Identifikasi risiko",
-        "Prosedur keselamatan kerja",
-        "Tanggung jawab pekerja",
-        "Budaya K3",
-      ],
-    },
-  ] satisfies TrainingProgram[],
-
-  publicProcess: [
-    {
-      title: "Pilih pelatihan",
-      description:
-        "Pelajari program yang tersedia dan pilih pelatihan yang sesuai dengan kebutuhan kompetensi.",
-    },
-    {
-      title: "Daftar sebagai peserta",
-      description:
-        "Lengkapi data pendaftaran melalui kanal resmi Muara Badak Bersatu.",
-    },
-    {
-      title: "Ikuti pelatihan",
-      description:
-        "Peserta mengikuti kegiatan sesuai jadwal, materi, dan ketentuan program.",
-    },
-    {
-      title: "Ikuti evaluasi",
-      description:
-        "Peserta mengikuti evaluasi atau penilaian yang ditetapkan pada program pelatihan.",
-    },
-    {
-      title: "Proses hasil",
-      description:
-        "Hasil pelatihan diproses sesuai prosedur program dan ketentuan pihak penerbit sertifikat.",
-    },
-  ],
 
   values: [
     {
-      title: "Akses lebih dekat",
+      title: "Informasi Jelas",
       description:
-        "Membawa kesempatan pengembangan kompetensi lebih dekat kepada masyarakat Muara Badak dan sekitarnya.",
+        "Jadwal, lokasi, biaya, kuota, instruktur, dan jalur sertifikasi ditampilkan setelah ditetapkan secara resmi.",
     },
     {
-      title: "Administrasi tertib",
+      title: "Kompetensi Relevan",
       description:
-        "Pendaftaran, informasi program, kegiatan, dan hasil pelatihan dikelola melalui proses administrasi yang terstruktur.",
+        "Program disusun untuk kebutuhan tenaga kerja lapangan dan lingkungan industri.",
     },
     {
-      title: "Berorientasi industri",
+      title: "Keselamatan Kerja",
       description:
-        "Program diarahkan pada jenis kompetensi yang relevan dengan aktivitas kerja dan kebutuhan lingkungan industri.",
-    },
-    {
-      title: "Keselamatan sebagai dasar",
-      description:
-        "Budaya kerja aman menjadi bagian penting dalam setiap program yang berkaitan dengan aktivitas lapangan.",
+        "Budaya kerja aman menjadi bagian penting dalam setiap program kompetensi.",
     },
   ],
 
   faq: [
     {
-      question: "Siapa yang dapat mengikuti pelatihan?",
+      question: "Apa itu PODH?",
       answer:
-        "Persyaratan peserta berbeda pada setiap program. Ketentuan lengkap akan ditampilkan pada pengumuman batch atau disampaikan melalui kanal pendaftaran resmi.",
+        "PODH adalah Persatuan Operator, Driver, Helper. Nama tersebut merupakan identitas organisasi yang bergerak dalam pengembangan kompetensi tenaga kerja lapangan dan industri.",
     },
     {
-      question: "Apakah pelatihan dilaksanakan di Muara Badak?",
+      question: "Apakah program PODH hanya untuk Operator, Driver, dan Helper?",
       answer:
-        "Lokasi pelaksanaan akan dicantumkan pada informasi resmi setiap batch. Tujuan program adalah membuat akses pelatihan lebih dekat bagi masyarakat daerah.",
+        "Tidak. Nama PODH adalah identitas organisasi. Program kompetensi dapat lebih luas, termasuk Welder, K3, Operator Crane, Rigger, dan program lain yang relevan.",
     },
     {
-      question: "Bagaimana cara mendaftar?",
+      question: "Apakah PODH menerbitkan sertifikat?",
       answer:
-        "Pendaftaran dilakukan melalui tautan resmi yang tersedia di situs ini. Hindari melakukan pendaftaran atau pembayaran melalui kontak yang tidak tercantum sebagai kanal resmi.",
+        "PODH tidak mengklaim sebagai penerbit sertifikat. Jika suatu pelatihan mencakup sertifikasi, nama lembaga penerbit atau mitra yang berwenang akan dicantumkan pada detail batch.",
     },
     {
-      question: "Apakah mengikuti pelatihan berarti otomatis mendapat sertifikat?",
+      question: "Bagaimana pendaftaran dilakukan?",
       answer:
-        "Tidak. Peserta tetap mengikuti proses pelatihan dan evaluasi sesuai ketentuan program. Penerbitan sertifikat mengikuti hasil dan prosedur lembaga penerbit yang berlaku.",
+        "Peserta memilih pelatihan, membaca detail batch, lalu mengisi formulir pendaftaran melalui situs. Saat backend produksi belum aktif, formulir hanya digunakan sebagai simulasi antarmuka dan tidak menyimpan dokumen.",
     },
     {
-      question: "Siapa yang menerbitkan sertifikat?",
+      question: "Bagaimana dengan permintaan pelatihan dari perusahaan?",
       answer:
-        "Nama lembaga penerbit dan jenis sertifikat akan dicantumkan pada informasi resmi setiap program setelah detail kerja sama dan pelaksanaan telah ditetapkan.",
-    },
-    {
-      question: "Di mana informasi biaya dan jadwal diumumkan?",
-      answer:
-        "Biaya, jadwal, fasilitas, persyaratan, dan ketentuan lain diumumkan pada halaman atau pengumuman resmi untuk setiap batch pelatihan.",
+        "Permintaan khusus perusahaan dipisahkan dari kegiatan organisasi PODH. Administrasi komersialnya ditangani melalui badan usaha terpisah yang ditunjuk.",
     },
   ],
 } as const;

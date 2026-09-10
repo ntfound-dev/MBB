@@ -1,60 +1,95 @@
-# Muara Badak Bersatu
+# PODH — Persatuan Operator, Driver, Helper
 
-Website publik Muara Badak Bersatu.
+Website organisasi + training center PODH.
 
-## Stack
+## Konsep
 
-- Next.js 16
-- React 19
-- TypeScript strict
-- Node.js 24+
-- App Router
+PODH adalah **organisasi**, bukan CV.
 
-## Data publik
+Website publik berfungsi sebagai pusat informasi program pelatihan kompetensi:
 
-Konten publik utama ada di:
+- Welder
+- K3
+- Operator Crane
+- Rigger
+
+Setiap pelatihan mempunyai halaman detail dengan:
+
+- status pendaftaran
+- periode pendaftaran
+- tanggal pelatihan
+- metode
+- lokasi
+- kuota
+- instruktur / fasilitator
+- biaya
+- lembaga / mitra sertifikasi
+- deskripsi & materi
+- tombol pendaftaran
+
+Data training utama ada di:
 
 ```text
-lib/site-data.ts
+lib/training-data.ts
 ```
 
-Website tidak memuat target peserta, margin, database peserta, alur pembayaran internal, nilai peserta, atau mekanisme administrasi internal.
+## Reguler vs Permintaan
 
-## Konfigurasi publik
+### Reguler
 
-Salin `.env.example` menjadi `.env.local`:
+Pelatihan terjadwal untuk peserta umum melalui PODH.
 
-```bash
-cp .env.example .env.local
-```
+### Permintaan perusahaan
 
-Kemudian isi jika sudah resmi:
+PODH tetap organisasi. Pelatihan khusus perusahaan diarahkan ke **CV terpisah** sebagai badan usaha pelaksana untuk:
+
+- penawaran
+- kontrak
+- invoice
+- pembayaran
+- administrasi komersial
+
+Nama CV dapat diisi melalui:
 
 ```env
-NEXT_PUBLIC_REGISTRATION_URL=https://...
-NEXT_PUBLIC_WHATSAPP_URL=https://wa.me/...
-NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/...
-NEXT_PUBLIC_TELEGRAM_URL=https://t.me/...
-NEXT_PUBLIC_FACEBOOK_URL=https://facebook.com/...
-NEXT_PUBLIC_EMAIL=...
+NEXT_PUBLIC_CV_NAME=
+NEXT_PUBLIC_REQUEST_WHATSAPP_URL=
 ```
 
-Jangan masukkan secret, data peserta, token, atau kredensial database ke variabel `NEXT_PUBLIC_*`.
+## Pendaftaran peserta
 
-## Development Termux
+Frontend sudah mempunyai form:
 
-```bash
-npm install
-npm run typecheck
-npm run dev
+- program
+- nama lengkap
+- NIK
+- nomor HP / WhatsApp
+- domisili
+- satu PDF dokumen
+
+Saat ini form masih **simulasi frontend** dan sengaja tidak mengirim NIK/PDF ke server.
+
+Sebelum data asli digunakan, backend wajib mempunyai auth, private storage, authorization, dan perlindungan data peserta.
+
+## Akun peserta
+
+UI akun disiapkan, tetapi tombol masuk default dinonaktifkan:
+
+```env
+NEXT_PUBLIC_ENABLE_ACCOUNT=false
 ```
 
-`dev` memakai webpack untuk menghindari masalah HMR Turbopack di Termux.
+Aktifkan hanya setelah backend autentikasi aman tersedia.
 
-## Production
+## Development di Termux
 
 ```bash
 npm run typecheck
-npm run build
-vercel
+git diff --check
+```
+
+Tidak perlu build lokal di Termux. Gunakan Vercel untuk build production:
+
+```bash
+vercel --prod
 ```

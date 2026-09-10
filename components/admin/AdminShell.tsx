@@ -9,7 +9,7 @@ import {
 
 type View = "season" | ProgramKey;
 
-const programOrder: ProgramKey[] = ["welder", "rigger", "k3"];
+const programOrder: ProgramKey[] = ["welder", "crane", "k3"];
 
 function Badge({ children }: { children: React.ReactNode }) {
   return <span className="season-badge">{children}</span>;
@@ -49,9 +49,9 @@ export function AdminShell() {
     <div className="season-admin">
       <aside className="season-sidebar">
         <a href="/" className="season-brand">
-          <span>MBB</span>
+          <span>PODH</span>
           <div>
-            <strong>Muara Badak Bersatu</strong>
+            <strong>Persatuan Operator, Driver, Helper</strong>
             <small>Admin Pelatihan</small>
           </div>
         </a>

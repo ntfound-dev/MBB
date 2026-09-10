@@ -1698,3 +1698,195 @@ button {
   .mbb-field-full { grid-column: auto; }
   .mbb-payment-actions { grid-template-columns: 1fr; }
 }
+
+/* === MBB single PDF registration === */
+.mbb-single-document {
+  margin-top: 4px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: #f8faf8;
+}
+
+.mbb-single-document-head {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.mbb-single-document-head > div > span {
+  color: var(--green-2);
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.mbb-single-document-head h3 {
+  margin: 5px 0 6px;
+  font-size: 1.15rem;
+}
+
+.mbb-single-document-head p {
+  max-width: 570px;
+  margin: 0;
+  color: var(--muted);
+  font-size: .75rem;
+  line-height: 1.55;
+}
+
+.mbb-pdf-rule {
+  flex: 0 0 auto;
+  padding: 7px 9px;
+  border: 1px solid #d5ded8;
+  background: #fff;
+  color: #65716a;
+  font-size: .63rem;
+  font-weight: 800;
+}
+
+.mbb-pdf-picker {
+  min-height: 118px;
+  padding: 19px;
+  display: grid !important;
+  grid-template-columns: 42px 1fr auto;
+  gap: 14px !important;
+  align-items: center;
+  border: 1px dashed #aebbb3;
+  background: #fff;
+  cursor: pointer;
+}
+
+.mbb-pdf-picker > svg {
+  width: 24px;
+  height: 24px;
+  color: var(--green);
+}
+
+.mbb-pdf-picker > div strong,
+.mbb-pdf-picker > div small {
+  display: block;
+}
+
+.mbb-pdf-picker > div strong {
+  font-size: .8rem;
+}
+
+.mbb-pdf-picker > div small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: .65rem;
+  font-weight: 400;
+}
+
+.mbb-pdf-picker > span {
+  padding: 9px 12px;
+  background: var(--green);
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+.mbb-pdf-picker input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mbb-pdf-selected {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 40px 1fr 34px;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #cddbd2;
+  background: #fff;
+}
+
+.mbb-pdf-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: #eaf2ed;
+  color: var(--green);
+}
+
+.mbb-pdf-selected > div strong,
+.mbb-pdf-selected > div small {
+  display: block;
+}
+
+.mbb-pdf-selected > div strong {
+  overflow-wrap: anywhere;
+  font-size: .78rem;
+}
+
+.mbb-pdf-selected > div small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: .64rem;
+}
+
+.mbb-pdf-selected > button {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #68736d;
+  cursor: pointer;
+}
+
+.mbb-pdf-error {
+  margin: 8px 0 0;
+  color: #a43a32;
+  font-size: .68rem;
+  font-weight: 700;
+}
+
+.mbb-document-privacy {
+  margin-top: 13px;
+  padding: 12px 13px;
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  background: #edf4ef;
+  color: var(--green-2);
+}
+
+.mbb-document-privacy > svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.mbb-document-privacy strong {
+  display: block;
+  font-size: .69rem;
+}
+
+.mbb-document-privacy p {
+  margin: 3px 0 0;
+  color: #6d7972;
+  font-size: .63rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 620px) {
+  .mbb-single-document-head {
+    flex-direction: column;
+  }
+
+  .mbb-pdf-picker {
+    grid-template-columns: 36px 1fr;
+  }
+
+  .mbb-pdf-picker > span {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+}

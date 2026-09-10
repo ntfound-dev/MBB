@@ -1,4 +1,4 @@
-export type ProgramSlug = "welder" | "rigger" | "k3";
+export type ProgramSlug = "welder" | "crane" | "k3";
 
 export type ProgramDetail = {
   slug: ProgramSlug;
@@ -25,23 +25,57 @@ export const programDetails: ProgramDetail[] = [
     location: "Muara Badak",
     duration: "Menyesuaikan batch",
     certificate: "Diterbitkan lembaga mitra sesuai ketentuan program",
-    topics: ["Dasar pengelasan", "Pengenalan peralatan", "Prosedur kerja", "Keselamatan kerja", "Evaluasi kompetensi"],
-    facilities: ["Materi pelatihan", "Peralatan praktik sesuai program", "Konsumsi selama kegiatan", "Evaluasi peserta", "Administrasi sertifikasi"],
-    requirements: ["Identitas diri yang masih berlaku", "Mengisi formulir pendaftaran", "Memenuhi persyaratan kesehatan program", "Mengikuti seluruh rangkaian pelatihan"],
+    topics: [
+      "Dasar pengelasan",
+      "Pengenalan peralatan",
+      "Prosedur kerja",
+      "Keselamatan kerja",
+      "Evaluasi kompetensi",
+    ],
+    facilities: [
+      "Materi pelatihan",
+      "Peralatan praktik sesuai program",
+      "Konsumsi selama kegiatan",
+      "Evaluasi peserta",
+      "Administrasi proses sertifikasi",
+    ],
+    requirements: [
+      "Identitas diri yang masih berlaku",
+      "Mengisi formulir pendaftaran",
+      "Memenuhi persyaratan kesehatan program",
+      "Mengikuti seluruh rangkaian pelatihan",
+    ],
   },
   {
-    slug: "rigger",
-    name: "Rigger",
-    subtitle: "Rigging dan kesiapan kerja pengangkatan beban.",
+    slug: "crane",
+    name: "Operator Crane",
+    subtitle: "Kompetensi operasi crane dan pengangkatan beban secara aman.",
     description:
-      "Pelatihan yang membangun pemahaman mengenai rigging, lifting gear, komunikasi lapangan, prosedur pengangkatan, dan keselamatan kerja.",
+      "Pelatihan yang membangun pemahaman mengenai dasar operasi crane, pemeriksaan alat dan area kerja, komunikasi lapangan, prosedur pengangkatan, dan keselamatan kerja.",
     price: "Rp7.500.000",
     location: "Muara Badak",
     duration: "Menyesuaikan batch",
     certificate: "Diterbitkan lembaga mitra sesuai ketentuan program",
-    topics: ["Dasar rigging", "Pengenalan lifting gear", "Komunikasi dan hand signal", "Prosedur pengangkatan", "Keselamatan kerja"],
-    facilities: ["Materi pelatihan", "Peralatan praktik sesuai program", "Konsumsi selama kegiatan", "Evaluasi peserta", "Administrasi sertifikasi"],
-    requirements: ["Identitas diri yang masih berlaku", "Mengisi formulir pendaftaran", "Memenuhi persyaratan kesehatan program", "Mengikuti seluruh rangkaian pelatihan"],
+    topics: [
+      "Dasar operasi crane",
+      "Pemeriksaan alat dan area kerja",
+      "Komunikasi dan hand signal",
+      "Prosedur pengangkatan",
+      "Keselamatan kerja",
+    ],
+    facilities: [
+      "Materi pelatihan",
+      "Peralatan praktik sesuai program",
+      "Konsumsi selama kegiatan",
+      "Evaluasi peserta",
+      "Administrasi proses sertifikasi",
+    ],
+    requirements: [
+      "Identitas diri yang masih berlaku",
+      "Mengisi formulir pendaftaran",
+      "Memenuhi persyaratan kesehatan program",
+      "Mengikuti seluruh rangkaian pelatihan",
+    ],
   },
   {
     slug: "k3",
@@ -53,9 +87,26 @@ export const programDetails: ProgramDetail[] = [
     location: "Muara Badak",
     duration: "Menyesuaikan batch",
     certificate: "Diterbitkan lembaga mitra sesuai ketentuan program",
-    topics: ["Identifikasi bahaya", "Risk awareness", "Prosedur K3", "Tanggung jawab pekerja", "Budaya keselamatan"],
-    facilities: ["Materi pelatihan", "Konsumsi selama kegiatan", "Evaluasi peserta", "Administrasi sertifikasi", "Dokumentasi kegiatan"],
-    requirements: ["Identitas diri yang masih berlaku", "Mengisi formulir pendaftaran", "Memenuhi persyaratan program", "Mengikuti seluruh rangkaian pelatihan"],
+    topics: [
+      "Identifikasi bahaya",
+      "Risk awareness",
+      "Prosedur K3",
+      "Tanggung jawab pekerja",
+      "Budaya keselamatan",
+    ],
+    facilities: [
+      "Materi pelatihan",
+      "Konsumsi selama kegiatan",
+      "Evaluasi peserta",
+      "Administrasi proses sertifikasi",
+      "Dokumentasi kegiatan",
+    ],
+    requirements: [
+      "Identitas diri yang masih berlaku",
+      "Mengisi formulir pendaftaran",
+      "Memenuhi persyaratan program",
+      "Mengikuti seluruh rangkaian pelatihan",
+    ],
   },
 ];
 

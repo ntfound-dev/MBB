@@ -1,69 +1,84 @@
 import { AppFooter } from "@/components/AppFooter";
 import { Header } from "@/components/Header";
 import { RegistrationForm } from "@/components/RegistrationForm";
+import { getTraining } from "@/lib/training-data";
 
 export const metadata = {
   title: "Pendaftaran Pelatihan",
 };
 
-export default function RegistrationPage() {
+export default async function RegistrationPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ training?: string }>;
+}) {
+  const query = await searchParams;
+  const selected = query.training ? getTraining(query.training) : undefined;
+
   return (
     <>
       <Header />
-
       <main>
-        <section className="page-hero">
-          <div className="container page-hero-grid">
-            <div>
-              <span className="section-label">Pendaftaran • Season 1</span>
-              <h1>Pilih program dan mulai pendaftaran.</h1>
-              <p>
-                Season 1 terdiri dari tiga program pelatihan: Welder, Rigger, dan
-                K3. Halaman ini masih berupa simulasi aplikasi.
-              </p>
-            </div>
-
-            <aside className="mock-warning">
-              <strong>MOCK MODE</strong>
-              <p>
-                Belum ada database, pembayaran, atau identitas peserta asli yang
-                diproses.
-              </p>
-            </aside>
+        <section className="form-page-hero">
+          <div className="podh-shell">
+            <span className="eyebrow eyebrow-light">PENDAFTARAN PODH</span>
+            <h1>Daftar pelatihan.</h1>
+            <p>
+              {selected
+                ? `Program dipilih: ${selected.title}.`
+                : "Pilih program dan lengkapi data peserta."}
+            </p>
           </div>
         </section>
 
-        <section className="section section-white">
-          <div className="container form-layout">
-            <RegistrationForm />
+        <section className="podh-section">
+          <div className="podh-shell registration-layout-v3">
+            <RegistrationForm initialTrainingSlug={selected?.slug ?? ""} />
 
-            <aside className="form-aside">
-              <span className="section-label">Season Aktif</span>
-              <h2>Season 1</h2>
-              <p>Pelatihan Kompetensi 2026</p>
+            <aside className="registration-side">
+              <span className="eyebrow">ALUR PENDAFTARAN</span>
+              <ol>
+                <li>
+                  <span>01</span>
+                  <div>
+                    <strong>Pilih pelatihan</strong>
+                    <p>Baca detail batch sebelum mengisi data.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>02</span>
+                  <div>
+                    <strong>Lengkapi identitas</strong>
+                    <p>Nama, NIK, WhatsApp, dan domisili.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>03</span>
+                  <div>
+                    <strong>Upload satu PDF</strong>
+                    <p>Gabungkan dokumen yang diminta dalam satu file.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>04</span>
+                  <div>
+                    <strong>Verifikasi</strong>
+                    <p>Admin memeriksa pendaftaran pada sistem produksi.</p>
+                  </div>
+                </li>
+              </ol>
 
-              <hr />
-
-              <h3>Program</h3>
-              <ul>
-                <li>Welder</li>
-                <li>Rigger</li>
-                <li>K3</li>
-              </ul>
-
-              <hr />
-
-              <h3>Biaya sementara</h3>
-              <strong className="big-price">Rp7.500.000</strong>
-              <p>
-                Informasi harga masih mengikuti data sementara dan dapat
-                disesuaikan setelah keputusan rapat.
-              </p>
+              <div className="registration-payment-note">
+                <strong>Pembayaran</strong>
+                <p>
+                  Jika batch berbayar, metode resmi dapat berupa QRIS,
+                  transfer, atau cash sesuai pengumuman. Tidak ada cicilan.
+                </p>
+              </div>
             </aside>
           </div>
         </section>
       </main>
-
       <AppFooter />
     </>
   );
