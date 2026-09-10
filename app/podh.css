@@ -1908,3 +1908,698 @@ body {
   text-transform: uppercase;
   letter-spacing: .055em;
 }
+
+/* PODH HOME VISUAL REFRESH */
+
+/* ---------------------------------------------------------
+   HERO
+--------------------------------------------------------- */
+
+.podh-home .podh-hero {
+  padding: 24px 0 46px;
+}
+
+.podh-home .podh-hero-card {
+  min-height: 620px;
+  isolation: isolate;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, .88fr);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.06);
+  background:
+    radial-gradient(circle at 81% 24%, rgba(242,183,25,.29), transparent 27%),
+    radial-gradient(circle at 70% 108%, rgba(242,183,25,.13), transparent 35%),
+    linear-gradient(116deg, #050505 0%, #0d0d0d 46%, #18140b 70%, #302408 100%);
+  box-shadow:
+    0 32px 85px rgba(14,14,14,.24),
+    inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+.podh-home .podh-hero-overlay {
+  z-index: 1;
+  opacity: 1;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.03) 0%,
+      rgba(0,0,0,.05) 45%,
+      rgba(0,0,0,.28) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.025),
+      transparent 28%,
+      rgba(0,0,0,.18)
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 0 1px,
+      transparent 1px 48px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.018) 0 1px,
+      transparent 1px 48px
+    );
+}
+
+.podh-home .podh-hero-content {
+  z-index: 3;
+}
+
+.podh-home .podh-hero-content h1 {
+  max-width: 760px;
+  text-shadow: 0 10px 38px rgba(0,0,0,.28);
+}
+
+.podh-home .podh-hero-content h1 span {
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 35px rgba(242,183,25,.18);
+}
+
+.podh-home .podh-hero-content p {
+  max-width: 610px;
+  color: rgba(244,242,234,.74);
+}
+
+.podh-home .podh-hero-actions {
+  margin-top: 34px;
+}
+
+.podh-home .podh-hero-actions .podh-button {
+  min-height: 52px;
+  padding-inline: 22px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.16);
+}
+
+/* Logo becomes a visual object instead of a plain image. */
+
+.podh-home .podh-hero-logo-wrap {
+  position: relative;
+  z-index: 2;
+  min-height: 430px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255,214,99,.19), transparent 34%),
+    linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.015));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -80px 100px rgba(0,0,0,.24),
+    0 30px 65px rgba(0,0,0,.23);
+  backdrop-filter: blur(8px);
+  transform: rotate(1.6deg);
+}
+
+.podh-home .podh-hero-logo-wrap::before {
+  content: "";
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  background: rgba(242,183,25,.21);
+  filter: blur(70px);
+  transform: translate(50px, -40px);
+}
+
+.podh-home .podh-hero-logo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      130deg,
+      rgba(255,255,255,.11) 0%,
+      transparent 24%,
+      transparent 69%,
+      rgba(242,183,25,.08) 100%
+    );
+  pointer-events: none;
+}
+
+.podh-home .podh-hero-logo-wrap img {
+  position: relative;
+  z-index: 2;
+  width: min(390px, 88%);
+  transform: scale(1.06) rotate(-1.6deg);
+  filter:
+    drop-shadow(0 30px 45px rgba(0,0,0,.46))
+    contrast(1.04)
+    saturate(1.04);
+  transition:
+    transform .45s ease,
+    filter .45s ease;
+}
+
+.podh-home .podh-hero-card:hover .podh-hero-logo-wrap img {
+  transform: scale(1.095) rotate(-.6deg);
+  filter:
+    drop-shadow(0 34px 52px rgba(0,0,0,.52))
+    contrast(1.06)
+    saturate(1.08);
+}
+
+
+/* ---------------------------------------------------------
+   LATEST TRAINING
+--------------------------------------------------------- */
+
+.home-training-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% -15%, rgba(242,183,25,.10), transparent 28%),
+    linear-gradient(180deg, #faf9f5, #f3f1ea);
+}
+
+.home-training-section .podh-section-heading {
+  margin-bottom: 48px;
+}
+
+.home-training-section .podh-section-heading::after {
+  content: "";
+  width: 82px;
+  height: 4px;
+  display: block;
+  margin: 22px auto 0;
+  border-radius: 999px;
+  background: var(--podh-gold);
+  box-shadow: 0 8px 22px rgba(242,183,25,.28);
+}
+
+.home-training-section .training-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/*
+   On the homepage only, the ordinary card becomes
+   a large poster. /pelatihan keeps the original card.
+*/
+
+.home-training-section .training-card {
+  position: relative;
+  min-height: 560px;
+  display: grid;
+  overflow: hidden;
+  border: 0;
+  border-radius: 28px;
+  background: #111;
+  box-shadow: 0 22px 55px rgba(15,15,15,.17);
+  transition:
+    transform .28s ease,
+    box-shadow .28s ease;
+}
+
+.home-training-section .training-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 75px rgba(15,15,15,.23);
+}
+
+.home-training-section .training-card::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255,255,255,.085) 42%,
+      transparent 62%
+    );
+  transform: translateX(-38%);
+  transition:
+    opacity .3s ease,
+    transform .65s ease;
+}
+
+.home-training-section .training-card:hover::after {
+  opacity: 1;
+  transform: translateX(38%);
+}
+
+.home-training-section .training-poster,
+.home-training-section .training-card-body {
+  grid-area: 1 / 1;
+}
+
+.home-training-section .training-poster {
+  min-height: 560px;
+  padding: 25px;
+}
+
+.home-training-section .training-poster::before {
+  width: 430px;
+  height: 430px;
+  right: -130px;
+  top: -45px;
+  border-color: rgba(255,255,255,.14);
+  box-shadow:
+    0 0 0 52px rgba(255,255,255,.018),
+    0 0 0 104px rgba(255,255,255,.012);
+}
+
+.home-training-section .training-poster::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.03) 0%,
+      rgba(0,0,0,.05) 34%,
+      rgba(0,0,0,.52) 67%,
+      rgba(0,0,0,.96) 100%
+    ),
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 25px,
+      rgba(255,255,255,.022) 25px 27px
+    );
+}
+
+.home-training-section .training-poster-welder {
+  background:
+    radial-gradient(circle at 70% 28%, rgba(242,139,25,.33), transparent 30%),
+    linear-gradient(145deg, #3c2918 0%, #17110d 47%, #070707 100%);
+}
+
+.home-training-section .training-poster-k3 {
+  background:
+    radial-gradient(circle at 72% 27%, rgba(245,199,40,.33), transparent 31%),
+    linear-gradient(145deg, #55430b 0%, #201b0b 46%, #090909 100%);
+}
+
+.home-training-section .training-poster-crane {
+  background:
+    radial-gradient(circle at 72% 26%, rgba(255,189,37,.28), transparent 31%),
+    linear-gradient(145deg, #463713 0%, #1d180e 48%, #090909 100%);
+}
+
+.home-training-section .training-poster-rigger {
+  background:
+    radial-gradient(circle at 72% 26%, rgba(242,183,25,.22), transparent 30%),
+    linear-gradient(145deg, #343434 0%, #191919 46%, #070707 100%);
+}
+
+.home-training-section .training-poster-top {
+  align-items: flex-start;
+}
+
+.home-training-section .training-status {
+  padding: 9px 13px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 999px;
+  box-shadow: 0 9px 25px rgba(0,0,0,.22);
+  backdrop-filter: blur(10px);
+}
+
+.home-training-section .training-poster-top small {
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 999px;
+  background: rgba(0,0,0,.20);
+  color: rgba(255,255,255,.74);
+  backdrop-filter: blur(9px);
+}
+
+.home-training-section .training-poster-brand {
+  margin-top: 25px;
+}
+
+.home-training-section .training-poster-brand span {
+  font-size: 2rem;
+  text-shadow: 0 8px 25px rgba(0,0,0,.28);
+}
+
+.home-training-section .training-poster-icon {
+  opacity: .78;
+  transform: translateY(-12px);
+}
+
+.home-training-section .training-poster-icon svg {
+  width: 155px;
+  height: 155px;
+  stroke-width: .9;
+  color: rgba(242,183,25,.88);
+  filter:
+    drop-shadow(0 28px 32px rgba(0,0,0,.37))
+    drop-shadow(0 0 24px rgba(242,183,25,.10));
+}
+
+.home-training-section .training-poster-copy {
+  display: none;
+}
+
+.home-training-section .training-card-body {
+  position: relative;
+  z-index: 4;
+  align-self: end;
+  padding: 180px 30px 30px;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(5,5,5,.10) 25%,
+      rgba(5,5,5,.79) 61%,
+      rgba(5,5,5,.96) 100%
+    );
+  color: #fff;
+}
+
+.home-training-section .training-card-meta {
+  color: rgba(255,255,255,.69);
+  font-size: .72rem;
+}
+
+.home-training-section .training-card-meta svg {
+  color: var(--podh-gold);
+}
+
+.home-training-section .training-card-body h3 {
+  max-width: 470px;
+  margin: 12px 0 10px;
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: .92;
+  text-shadow: 0 9px 28px rgba(0,0,0,.36);
+}
+
+.home-training-section .training-card-body p {
+  max-width: 510px;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  color: rgba(255,255,255,.69);
+  font-size: .8rem;
+  line-height: 1.62;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.home-training-section .training-detail-link {
+  min-height: 44px;
+  margin-top: 20px;
+  padding: 0 16px;
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 999px;
+  color: #fff;
+  font-size: .72rem;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.07);
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+.home-training-section .training-detail-link:hover {
+  border-color: var(--podh-gold);
+  background: rgba(242,183,25,.14);
+  transform: translateX(3px);
+}
+
+.home-training-section .podh-center-action {
+  margin-top: 40px;
+}
+
+.home-training-section .podh-center-action .podh-button {
+  width: auto;
+  min-height: 52px;
+  padding-inline: 25px;
+  box-shadow: 0 12px 30px rgba(15,15,15,.07);
+}
+
+
+/* ---------------------------------------------------------
+   REGULAR / REQUEST
+--------------------------------------------------------- */
+
+.home-training-paths {
+  gap: 1px;
+  background: #171717;
+}
+
+.home-training-paths .training-path {
+  position: relative;
+  isolation: isolate;
+  min-height: 490px;
+  overflow: hidden;
+  align-items: center;
+  text-align: center;
+}
+
+.home-training-paths .training-path::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 430px;
+  height: 430px;
+  top: -215px;
+  right: -120px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 65px rgba(255,255,255,.018),
+    0 0 0 130px rgba(255,255,255,.012);
+}
+
+.home-training-paths .training-path-regular {
+  background:
+    radial-gradient(circle at 35% 15%, rgba(242,183,25,.14), transparent 30%),
+    linear-gradient(135deg, #101010, #252117);
+}
+
+.home-training-paths .training-path-request {
+  background:
+    radial-gradient(circle at 70% 20%, rgba(255,255,255,.09), transparent 31%),
+    linear-gradient(135deg, #242424, #111);
+}
+
+.home-training-paths .training-path > svg {
+  width: 76px;
+  height: 76px;
+  padding: 19px;
+  border-color: rgba(255,255,255,.70);
+  box-shadow:
+    inset 0 0 0 6px rgba(255,255,255,.025),
+    0 16px 35px rgba(0,0,0,.18);
+}
+
+.home-training-paths .training-path h2 {
+  margin: 22px 0 10px;
+  font-family: var(--font-podh-display), sans-serif;
+  font-size: clamp(3.3rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: .88;
+  letter-spacing: -.015em;
+}
+
+.home-training-paths .training-path p {
+  max-width: 470px;
+  color: rgba(255,255,255,.68);
+}
+
+.home-training-paths .training-path a {
+  min-height: 46px;
+  padding: 0 19px;
+  border-color: rgba(255,255,255,.48);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(8px);
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+.home-training-paths .training-path a:hover {
+  border-color: var(--podh-gold);
+  background: rgba(242,183,25,.12);
+  transform: translateY(-2px);
+}
+
+
+/* ---------------------------------------------------------
+   LOWER HOME SECTIONS
+--------------------------------------------------------- */
+
+.podh-home .podh-about-section {
+  background:
+    radial-gradient(circle at 90% 30%, rgba(242,183,25,.08), transparent 27%),
+    #fff;
+}
+
+.podh-home .trust-section {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 5%, rgba(242,183,25,.12), transparent 26%),
+    #0d0d0d;
+}
+
+.podh-home .trust-item {
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.podh-home .trust-item:hover {
+  position: relative;
+  z-index: 2;
+  background: #1d1b15;
+  transform: translateY(-2px);
+}
+
+.podh-home .podh-activities {
+  background:
+    linear-gradient(180deg, #fff, #f7f5ef);
+}
+
+.podh-home .activity-preview-grid > div {
+  box-shadow: 0 16px 38px rgba(15,15,15,.12);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.podh-home .activity-preview-grid > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 23px 52px rgba(15,15,15,.17);
+}
+
+.podh-home .podh-faq-section {
+  background:
+    radial-gradient(circle at 14% 8%, rgba(242,183,25,.08), transparent 23%),
+    var(--podh-bg);
+}
+
+
+/* ---------------------------------------------------------
+   HOME RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .podh-home .podh-hero-card {
+    grid-template-columns: 1fr;
+    min-height: 690px;
+  }
+
+  .podh-home .podh-hero-logo-wrap {
+    position: absolute;
+    width: 355px;
+    height: 355px;
+    min-height: 0;
+    right: -62px;
+    bottom: -52px;
+    border-color: rgba(255,255,255,.055);
+    opacity: .32;
+    transform: rotate(-7deg);
+  }
+
+  .podh-home .podh-hero-logo-wrap img {
+    width: 88%;
+  }
+
+  .podh-home .podh-hero-content {
+    max-width: 650px;
+  }
+
+  .home-training-section .training-grid {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .podh-home .podh-hero {
+    padding: 12px 0 34px;
+  }
+
+  .podh-home .podh-hero-card {
+    min-height: 650px;
+    padding: 38px 24px 30px;
+    border-radius: 23px;
+  }
+
+  .podh-home .podh-hero-content h1 {
+    margin-top: 15px;
+    font-size: clamp(3.1rem, 15vw, 4.75rem);
+    line-height: .83;
+  }
+
+  .podh-home .podh-hero-content p {
+    max-width: 94%;
+    font-size: .86rem;
+    line-height: 1.68;
+  }
+
+  .podh-home .podh-hero-logo-wrap {
+    width: 290px;
+    height: 290px;
+    right: -70px;
+    bottom: -35px;
+    opacity: .23;
+  }
+
+  .home-training-section {
+    padding-top: 72px;
+  }
+
+  .home-training-section .podh-section-heading {
+    margin-bottom: 36px;
+  }
+
+  .home-training-section .training-card,
+  .home-training-section .training-poster {
+    min-height: 535px;
+  }
+
+  .home-training-section .training-card {
+    border-radius: 24px;
+  }
+
+  .home-training-section .training-poster {
+    padding: 21px;
+  }
+
+  .home-training-section .training-poster-icon svg {
+    width: 125px;
+    height: 125px;
+  }
+
+  .home-training-section .training-card-body {
+    padding: 155px 23px 24px;
+  }
+
+  .home-training-section .training-card-body h3 {
+    font-size: 2.25rem;
+  }
+
+  .home-training-section .training-card-body p {
+    -webkit-line-clamp: 2;
+  }
+
+  .home-training-section .training-detail-link {
+    width: fit-content;
+  }
+
+  .home-training-section .podh-center-action .podh-button {
+    width: 100%;
+  }
+
+  .home-training-paths .training-path {
+    min-height: 440px;
+    padding: 58px 26px !important;
+  }
+
+  .home-training-paths .training-path h2 {
+    font-size: 3.6rem;
+  }
+
+  .home-training-paths .training-path > svg {
+    width: 70px;
+    height: 70px;
+  }
+}

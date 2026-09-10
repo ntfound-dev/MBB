@@ -18,7 +18,7 @@ export default function HomePage() {
     <>
       <Header />
 
-      <main>
+      <main className="podh-home">
         <section className="podh-hero">
           <div className="podh-shell podh-hero-card">
             <div className="podh-hero-overlay" />
@@ -55,7 +55,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="podh-section">
+        <section className="podh-section home-training-section">
           <div className="podh-shell">
             <div className="podh-section-heading podh-section-heading-center">
               <span className="eyebrow">PELATIHAN TERBARU</span>
@@ -80,7 +80,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="training-paths">
+        <section className="training-paths home-training-paths">
           <div className="training-path training-path-regular">
             <FiCalendar />
             <h2>Reguler</h2>
