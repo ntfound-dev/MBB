@@ -22,7 +22,7 @@ export function AppFooter() {
             <strong>Link</strong>
             <Link href="/">Beranda</Link>
             <Link href="/pelatihan">Daftar Pelatihan</Link>
-            <Link href="/#tentang">Tentang PODH</Link>
+            <Link href="/tentang-kami">Tentang Kami</Link>
             <Link href="/permintaan">Permintaan</Link>
           </div>
           <div>

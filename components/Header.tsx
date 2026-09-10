@@ -8,7 +8,7 @@ import { siteData } from "@/lib/site-data";
 const nav = [
   ["Beranda", "/"],
   ["Program", "/pelatihan"],
-  ["Tentang PODH", "/#tentang"],
+  ["Tentang Kami", "/tentang-kami"],
   ["Kegiatan", "/#kegiatan"],
   ["Permintaan", "/permintaan"],
 ] as const;

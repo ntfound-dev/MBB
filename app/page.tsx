@@ -4,6 +4,8 @@ import {
   FiBriefcase,
   FiCalendar,
   FiCheckCircle,
+  FiEye,
+  FiTarget,
   FiSearch,
 } from "react-icons/fi";
 import { AppFooter } from "@/components/AppFooter";
@@ -103,32 +105,6 @@ export default function HomePage() {
             <Link href="/permintaan">
               Ajukan Permintaan <FiArrowRight />
             </Link>
-          </div>
-        </section>
-
-        <section id="tentang" className="podh-section podh-about-section">
-          <div className="podh-shell podh-about-grid">
-            <div>
-              <span className="eyebrow">TENTANG PODH</span>
-              <h2>Nama organisasi, program kompetensi yang lebih luas.</h2>
-            </div>
-
-            <div className="podh-about-copy">
-              <p>
-                PODH adalah singkatan dari Persatuan Operator, Driver, Helper.
-                Nama tersebut menjadi identitas organisasi.
-              </p>
-              <p>
-                Program organisasi tidak dibatasi oleh tiga nama profesi di
-                dalam singkatan tersebut. Fokus awal pengembangan kompetensi
-                mencakup Welder, K3, Operator Crane, dan Rigger.
-              </p>
-              <p>
-                Setiap batch dibuat sebagai halaman yang dapat diperiksa:
-                tanggal pendaftaran, tanggal pelatihan, metode, lokasi, kuota,
-                instruktur, biaya, dan informasi sertifikasi.
-              </p>
-            </div>
           </div>
         </section>
 
@@ -278,23 +254,6 @@ export default function HomePage() {
                 </div>
               </div>
             </article>
-          </div>
-        </section>
-
-        <section className="podh-showcase-section podh-faq-section podh-faq-showcase">
-          <div className="podh-shell">
-            <div className="podh-showcase-heading">
-              <span className="eyebrow">FAQ</span>
-              <h2>Pertanyaan yang sering ditanyakan.</h2>
-              <p>
-                Informasi dasar mengenai keanggotaan, program, pendaftaran,
-                sertifikasi, dan permintaan pelatihan.
-              </p>
-            </div>
-
-            <div className="podh-faq-showcase-list">
-              <Faq />
-            </div>
           </div>
         </section>
 
