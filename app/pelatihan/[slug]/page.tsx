@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import { AppFooter } from "@/components/AppFooter";
 import { Header } from "@/components/Header";
+import { RegistrationForm } from "@/components/RegistrationForm";
 import {
   getStatusLabel,
   getTraining,
@@ -150,9 +151,9 @@ export default async function TrainingDetailPage({
               {canRegister ? (
                 <Link
                   className="podh-button podh-button-accent training-register-button"
-                  href={`/daftar?training=${training.slug}`}
+                  href="#daftar-program"
                 >
-                  Daftar Sekarang
+                  Daftar Program Ini
                 </Link>
               ) : (
                 <button
@@ -173,6 +174,81 @@ export default async function TrainingDetailPage({
             </aside>
           </div>
         </section>
+
+        {canRegister && (
+          <section
+            id="daftar-program"
+            className="podh-section program-registration-section"
+          >
+            <div className="podh-shell">
+              <div className="program-registration-heading">
+                <span className="eyebrow">PENDAFTARAN PROGRAM</span>
+                <h2>Daftar {training.title}</h2>
+                <p>
+                  Form ini khusus untuk program yang sedang kamu lihat.
+                  Program tidak dapat diganti dari dalam formulir.
+                </p>
+              </div>
+
+              <div className="program-registration-layout">
+                <RegistrationForm
+                  initialTrainingSlug={training.slug}
+                  lockedTraining
+                />
+
+                <aside className="program-registration-progress">
+                  <span className="eyebrow">SETELAH MENDAFTAR</span>
+                  <h3>Pantau proses dari akun peserta.</h3>
+
+                  <ol>
+                    <li>
+                      <span>01</span>
+                      <div>
+                        <strong>Pendaftaran dikirim</strong>
+                        <small>Data masuk untuk diperiksa.</small>
+                      </div>
+                    </li>
+                    <li>
+                      <span>02</span>
+                      <div>
+                        <strong>Verifikasi dokumen</strong>
+                        <small>Admin memeriksa persyaratan peserta.</small>
+                      </div>
+                    </li>
+                    <li>
+                      <span>03</span>
+                      <div>
+                        <strong>Pembayaran</strong>
+                        <small>Muncul jika batch membutuhkan pembayaran.</small>
+                      </div>
+                    </li>
+                    <li>
+                      <span>04</span>
+                      <div>
+                        <strong>Pendaftaran diterima</strong>
+                        <small>Peserta siap mengikuti jadwal program.</small>
+                      </div>
+                    </li>
+                    <li>
+                      <span>05</span>
+                      <div>
+                        <strong>Pelatihan</strong>
+                        <small>Progres kegiatan dan evaluasi.</small>
+                      </div>
+                    </li>
+                    <li>
+                      <span>06</span>
+                      <div>
+                        <strong>Selesai</strong>
+                        <small>Status akhir dan sertifikat jika tersedia.</small>
+                      </div>
+                    </li>
+                  </ol>
+                </aside>
+              </div>
+            </div>
+          </section>
+        )}
       </main>
       <AppFooter />
     </>

@@ -25,8 +25,10 @@ function formatFileSize(bytes: number) {
 
 export function RegistrationForm({
   initialTrainingSlug = "",
+  lockedTraining = false,
 }: {
   initialTrainingSlug?: string;
+  lockedTraining?: boolean;
 }) {
   const [trainingSlug, setTrainingSlug] = useState(
     trainings.some((item) => item.slug === initialTrainingSlug)
@@ -141,20 +143,30 @@ export function RegistrationForm({
       </div>
 
       <div className="registration-fields">
-        <label className="field-full">
-          <span>Pelatihan</span>
-          <select
-            value={trainingSlug}
-            onChange={(event) => setTrainingSlug(event.target.value)}
-            required
-          >
-            {trainings.map((item) => (
-              <option key={item.slug} value={item.slug}>
-                {item.title}
-              </option>
-            ))}
-          </select>
-        </label>
+        {lockedTraining ? (
+          <div className="field-full registration-program-locked">
+            <span>Program yang dipilih</span>
+            <strong>{training?.title ?? "-"}</strong>
+            <small>
+              Pendaftaran ini terikat ke program tersebut.
+            </small>
+          </div>
+        ) : (
+          <label className="field-full">
+            <span>Pelatihan</span>
+            <select
+              value={trainingSlug}
+              onChange={(event) => setTrainingSlug(event.target.value)}
+              required
+            >
+              {trainings.map((item) => (
+                <option key={item.slug} value={item.slug}>
+                  {item.title}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
         <label>
           <span>Nama Lengkap</span>
