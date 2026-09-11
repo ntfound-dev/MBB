@@ -194,39 +194,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="podh-showcase-section podh-partner-section">
-          <div className="podh-shell">
-            <div className="podh-showcase-heading podh-showcase-heading-dark">
-              <span className="eyebrow eyebrow-light">MITRA PODH</span>
-              <h2>Kolaborasi yang bisa diverifikasi.</h2>
-              <p>
-                Nama dan logo mitra hanya ditampilkan setelah kerja sama,
-                penyelenggara, atau jalur sertifikasinya telah dikonfirmasi.
-              </p>
-            </div>
-
-            <div className="podh-partner-grid">
-              {[
-                ["LP", "Lembaga Pelatihan", "Penyelenggara pelatihan resmi"],
-                ["LS", "Lembaga Sertifikasi", "Penerbit atau jalur sertifikasi"],
-                ["MI", "Mitra Industri", "Kolaborasi kebutuhan tenaga kerja"],
-                ["K3", "Keselamatan Kerja", "Pendukung kompetensi dan budaya K3"],
-                ["PK", "Partner Kompetensi", "Kolaborasi instruktur dan materi"],
-                ["KP", "Komunitas & Pendukung", "Ekosistem kegiatan PODH"],
-              ].map(([code, title, description]) => (
-                <article className="podh-partner-card" key={title}>
-                  <div className="podh-partner-logo-slot">{code}</div>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                    <span>DITAMPILKAN SETELAH RESMI</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="podh-showcase-section podh-testimonial-section">
           <div className="podh-shell podh-testimonial-layout">
             <div className="podh-testimonial-intro">
