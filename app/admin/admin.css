@@ -1430,3 +1430,259 @@
     font-size: 9px;
   }
 }
+
+/* PODH REQUEST ACTIVITY ALUMNI V1 */
+.ops-module-detail {
+  display: grid;
+  gap: 14px;
+}
+
+.module-toolbar {
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #ddd9cf;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.module-toolbar > span {
+  color: #6c665e;
+  font-size: .64rem;
+  font-weight: 800;
+}
+
+.module-toolbar > div {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.module-toolbar button {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid #d8d2c5;
+  border-radius: 7px;
+  background: #fff;
+  color: #292723;
+  font: inherit;
+  font-size: .6rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.module-toolbar button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.request-status-flow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.request-status-flow article {
+  min-height: 94px;
+  padding: 14px;
+  border: 1px solid #e0dcd3;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.request-status-flow span,
+.request-status-flow strong {
+  display: block;
+}
+
+.request-status-flow span {
+  color: #9d6b00;
+  font-size: .58rem;
+  font-weight: 900;
+}
+
+.request-status-flow strong {
+  margin-top: 12px;
+  color: #171717;
+  font-size: .68rem;
+  line-height: 1.35;
+}
+
+.ops-definition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ops-definition-grid-four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ops-definition-grid article,
+.visibility-panel,
+.alumni-principle-grid article {
+  padding: 19px;
+  border: 1px solid #e0dcd3;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.ops-definition-grid small,
+.visibility-panel small,
+.alumni-principle-grid small {
+  color: #8b6b12;
+  font-size: .59rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.ops-definition-grid h3,
+.visibility-panel h3 {
+  margin: 6px 0 9px;
+  color: #171717;
+  font-size: .92rem;
+}
+
+.ops-definition-grid p,
+.visibility-panel p,
+.alumni-principle-grid p {
+  margin: 0;
+  color: #756f67;
+  font-size: .64rem;
+  line-height: 1.5;
+}
+
+.ops-definition-grid ul {
+  margin: 10px 0 0;
+  padding-left: 17px;
+  color: #5f5a53;
+  font-size: .66rem;
+  line-height: 1.75;
+}
+
+.visibility-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: #fbf5df;
+}
+
+.visibility-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.visibility-tags span {
+  padding: 7px 9px;
+  border: 1px solid #e6cf82;
+  border-radius: 999px;
+  background: #fff;
+  color: #765500;
+  font-size: .57rem;
+  font-weight: 900;
+}
+
+.alumni-principle-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 9px;
+  align-items: center;
+}
+
+.alumni-principle-grid > span {
+  color: #b2aba1;
+  font-size: 1rem;
+}
+
+.alumni-principle-grid strong {
+  display: block;
+  margin: 7px 0 5px;
+  color: #171717;
+  font-size: .8rem;
+}
+
+.ops-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #ddd9cf;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.ops-data-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.ops-data-table th,
+.ops-data-table td {
+  padding: 12px 11px;
+  border-bottom: 1px solid #ece8e0;
+  text-align: left;
+}
+
+.ops-data-table th {
+  color: #8a847b;
+  font-size: .56rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.ops-data-empty {
+  padding: 26px !important;
+  color: #8c867d;
+  font-size: .66rem;
+  text-align: center !important;
+}
+
+@media (max-width: 1100px) {
+  .request-status-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ops-definition-grid-four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .module-toolbar,
+  .visibility-panel {
+    display: block;
+  }
+
+  .module-toolbar > div,
+  .visibility-tags {
+    margin-top: 11px;
+    justify-content: flex-start;
+  }
+
+  .request-status-flow,
+  .ops-definition-grid,
+  .ops-definition-grid-four {
+    grid-template-columns: 1fr;
+  }
+
+  .alumni-principle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .alumni-principle-grid > span {
+    display: none;
+  }
+}
+
+@media print {
+  .module-toolbar,
+  .season-sidebar,
+  .season-top-actions,
+  .season-mobile-nav {
+    display: none !important;
+  }
+}
