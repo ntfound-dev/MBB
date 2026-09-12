@@ -4,12 +4,9 @@ import {
   FiBriefcase,
   FiCalendar,
   FiCheckCircle,
-  FiEye,
-  FiTarget,
   FiSearch,
 } from "react-icons/fi";
 import { AppFooter } from "@/components/AppFooter";
-import { Faq } from "@/components/Faq";
 import { Header } from "@/components/Header";
 import { TrainingCard } from "@/components/TrainingCard";
 import { featuredTrainings } from "@/lib/training-data";
@@ -133,96 +130,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* PODH HOMEPAGE SHOWCASE V1 */}
-        <section
-          id="kegiatan"
-          className="podh-showcase-section podh-facilitators-section"
-        >
-          <div className="podh-shell">
-            <div className="podh-showcase-heading">
-              <span className="eyebrow">INSTRUKTUR & FASILITATOR</span>
-              <h2>Belajar dari tenaga yang tepat.</h2>
-              <p>
-                Profil instruktur ditampilkan saat nama, kompetensi, dan perannya
-                pada batch telah ditetapkan secara resmi.
-              </p>
-            </div>
-
-            <div className="podh-facilitator-grid">
-              {[
-                {
-                  code: "WLD",
-                  title: "Instruktur Welder",
-                  meta: "Pengelasan",
-                  description:
-                    "Profil instruktur, pengalaman, dan lingkup kompetensi akan tampil pada batch resmi.",
-                },
-                {
-                  code: "K3",
-                  title: "Fasilitator K3",
-                  meta: "Keselamatan Kerja",
-                  description:
-                    "Nama fasilitator dan ruang lingkup materi akan diumumkan bersama detail pelatihan.",
-                },
-                {
-                  code: "CRN",
-                  title: "Instruktur Operator Crane",
-                  meta: "Operasi Alat",
-                  description:
-                    "Kompetensi instruktur akan dicantumkan setelah jadwal dan penyelenggara ditetapkan.",
-                },
-                {
-                  code: "RIG",
-                  title: "Instruktur Rigger",
-                  meta: "Rigging & Lifting",
-                  description:
-                    "Profil pengajar akan tampil ketika batch rigging dan lifting dibuka secara resmi.",
-                },
-              ].map((item) => (
-                <article className="podh-facilitator-card" key={item.code}>
-                  <div className="podh-facilitator-visual">
-                    <div className="podh-facilitator-mark">{item.code}</div>
-                  </div>
-                  <div className="podh-facilitator-body">
-                    <span>{item.meta}</span>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="podh-showcase-section podh-testimonial-section">
-          <div className="podh-shell podh-testimonial-layout">
-            <div className="podh-testimonial-intro">
-              <span className="eyebrow">SUARA PESERTA</span>
-              <h2>Testimoni dari pengalaman nyata.</h2>
-              <p>
-                Testimoni tidak dibuat sebagai contoh fiktif. Bagian ini sudah
-                disiapkan dan akan diisi setelah peserta benar-benar menyelesaikan
-                program PODH.
-              </p>
-            </div>
-
-            <article className="podh-testimonial-card">
-              <div className="podh-quote-mark">“</div>
-              <blockquote>
-                Pengalaman peserta, hasil pelatihan, dan kesan terhadap program
-                akan ditampilkan di sini setelah mendapat persetujuan untuk
-                dipublikasikan.
-              </blockquote>
-              <div className="podh-testimonial-meta">
-                <div className="podh-testimonial-avatar">P</div>
-                <div>
-                  <strong>Peserta PODH</strong>
-                  <span>Menunggu batch pertama selesai</span>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
 
       </main>
 

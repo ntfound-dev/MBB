@@ -71,7 +71,7 @@ export function AdminShell() {
           <span>PODH</span>
           <div>
             <strong>Persatuan Operator, Driver, Helper</strong>
-            <small>Admin Pelatihan</small>
+            <small>Admin PODH</small>
           </div>
         </a>
 
@@ -148,8 +148,8 @@ export function AdminShell() {
         <div className="season-sidebar-bottom">
           <span className="demo-dot" />
           <div>
-            <strong>Demo Mode</strong>
-            <small>Semua data fiktif</small>
+            <strong>Preview UI</strong>
+            <small>Belum terhubung data produksi</small>
           </div>
         </div>
       </aside>
@@ -198,12 +198,29 @@ export function AdminShell() {
             Season
           </button>
 
+          {adminModules.map((item) => (
+            <button
+              type="button"
+              key={item.key}
+              className={view === item.key ? "active" : ""}
+              onClick={() => {
+                setView(item.key);
+                setQuery("");
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
+
           {season.programs.map((program) => (
             <button
               type="button"
               key={program.key}
               className={view === program.key ? "active" : ""}
-              onClick={() => setView(program.key)}
+              onClick={() => {
+                setView(program.key);
+                setQuery("");
+              }}
             >
               {program.name}
             </button>
@@ -223,7 +240,7 @@ export function AdminShell() {
               <article>
                 <span>Pembayaran Lunas</span>
                 <strong>{summary.paid}</strong>
-                <small>peserta mock</small>
+                <small>data preview</small>
               </article>
               <article>
                 <span>Nilai Rata-rata</span>
@@ -233,7 +250,7 @@ export function AdminShell() {
               <article>
                 <span>Sertifikat Terbit</span>
                 <strong>{summary.certificates}</strong>
-                <small>mock status</small>
+                <small>data preview</small>
               </article>
             </section>
 
@@ -293,7 +310,7 @@ export function AdminShell() {
                   <small>Progress</small>
                   <h2>Progres Season</h2>
                 </div>
-                <span>Mock data</span>
+                <span>Preview UI</span>
               </div>
 
               <div className="progress-table">

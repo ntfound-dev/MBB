@@ -9,7 +9,6 @@ const nav = [
   ["Beranda", "/"],
   ["Program", "/pelatihan"],
   ["Tentang Kami", "/tentang-kami"],
-  ["Kegiatan", "/#kegiatan"],
   ["Permintaan", "/permintaan"],
 ] as const;
 
@@ -44,15 +43,17 @@ export function Header() {
         </nav>
 
         <div className="podh-header-actions">
-          <Link className="podh-header-cta" href="/anggota/daftar">
-            Daftar Anggota
-          </Link>
-
           {accountEnabled && (
-            <Link className="podh-login" href="/anggota/masuk">
-              <FiLogIn />
-              <span>Masuk</span>
-            </Link>
+            <>
+              <Link className="podh-header-cta" href="/anggota/daftar">
+                Daftar Anggota
+              </Link>
+
+              <Link className="podh-login" href="/anggota/masuk">
+                <FiLogIn />
+                <span>Masuk</span>
+              </Link>
+            </>
           )}
 
           <button
