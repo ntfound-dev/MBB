@@ -1170,3 +1170,263 @@
     justify-content: flex-start;
   }
 }
+
+/* PODH PARTICIPANT OPERATIONS V2 */
+.program-operation-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.program-operation-actions button {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid #d8d2c5;
+  border-radius: 7px;
+  background: #fff;
+  color: #292723;
+  font: inherit;
+  font-size: .62rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.program-operation-actions button:hover {
+  border-color: #f2b719;
+  background: #fbf5df;
+}
+
+.program-operation-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.program-operation-stats article {
+  padding: 16px;
+  border: 1px solid #e0ddd5;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.program-operation-stats small,
+.program-operation-stats strong,
+.program-operation-stats span {
+  display: block;
+}
+
+.program-operation-stats small {
+  color: #847e75;
+  font-size: .6rem;
+}
+
+.program-operation-stats strong {
+  margin-top: 7px;
+  color: #171717;
+  font-size: 1.35rem;
+}
+
+.program-operation-stats span {
+  margin-top: 3px;
+  color: #989188;
+  font-size: .57rem;
+}
+
+.payment-config-grid {
+  margin-bottom: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.payment-config-grid > div {
+  padding: 11px;
+  border: 1px solid #e8e3da;
+  border-radius: 8px;
+  background: #faf9f6;
+}
+
+.payment-config-grid small,
+.payment-config-grid strong {
+  display: block;
+}
+
+.payment-config-grid small {
+  color: #8d877e;
+  font-size: .57rem;
+}
+
+.payment-config-grid strong {
+  margin-top: 4px;
+  color: #312e29;
+  font-size: .65rem;
+  line-height: 1.4;
+}
+
+.participant-operation-panel {
+  padding: 22px;
+  border: 1px solid #ddd9cf;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.participant-operation-head {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.participant-operation-head small {
+  color: #8b6b12;
+  font-size: .61rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+
+.participant-operation-head h3 {
+  margin: 5px 0 0;
+  color: #171717;
+  font-size: 1.05rem;
+}
+
+.participant-operation-head > span {
+  color: #827c73;
+  font-size: .62rem;
+  font-weight: 700;
+}
+
+.participant-operation-table-wrap {
+  overflow-x: auto;
+}
+
+.participant-operation-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+.participant-operation-table th,
+.participant-operation-table td {
+  padding: 11px 9px;
+  border-bottom: 1px solid #ece8e0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.participant-operation-table th {
+  color: #8b857c;
+  font-size: .56rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.participant-operation-table td {
+  color: #3b3833;
+  font-size: .65rem;
+}
+
+.participant-operation-table td strong,
+.participant-operation-table td small {
+  display: block;
+}
+
+.participant-operation-table td strong {
+  color: #171717;
+  font-size: .69rem;
+}
+
+.participant-operation-table td small {
+  margin-top: 2px;
+  color: #969087;
+  font-size: .55rem;
+}
+
+.ops-status,
+.ops-progress {
+  display: inline-flex;
+  min-height: 24px;
+  padding: 0 8px;
+  align-items: center;
+  border: 1px solid #ded8cc;
+  border-radius: 999px;
+  background: #faf9f6;
+  color: #555048;
+  font-size: .57rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.ops-progress {
+  border-color: #ead48c;
+  background: #fbf5df;
+  color: #765500;
+}
+
+.ops-empty {
+  color: #aaa39a;
+}
+
+.participant-operation-empty {
+  padding: 24px !important;
+  color: #8c867d !important;
+  text-align: center !important;
+}
+
+.participant-operation-note {
+  margin: 13px 0 0;
+  color: #857f76;
+  font-size: .6rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1040px) {
+  .program-operation-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .payment-config-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .program-operation-actions {
+    margin-top: 12px;
+    justify-content: flex-start;
+  }
+
+  .program-operation-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .participant-operation-panel {
+    padding: 17px;
+  }
+}
+
+@media print {
+  .season-sidebar,
+  .season-top-actions,
+  .season-mobile-nav,
+  .program-operation-actions {
+    display: none !important;
+  }
+
+  .season-admin {
+    display: block;
+    background: #fff;
+  }
+
+  .season-main {
+    padding: 0;
+  }
+
+  .participant-operation-table {
+    min-width: 0;
+    font-size: 9px;
+  }
+}

@@ -1,24 +1,84 @@
+"use client";
+
+import type { Participant } from "@/lib/mock-data";
+
 type ProgramOperationsProps = {
   programName: string;
   programCode: string;
-  participantCount: number;
-  paidCount: number;
+  participants: Participant[];
 };
 
-const trainingDays = [
-  { day: "Hari 1", focus: "Registrasi, briefing, dan materi awal" },
-  { day: "Hari 2", focus: "Materi inti dan praktik" },
-  { day: "Hari 3", focus: "Praktik lanjutan dan evaluasi" },
-  { day: "Hari 4", focus: "Evaluasi akhir dan penutupan" },
-];
+const trainingDays = ["Hari 1", "Hari 2", "Hari 3", "Hari 4"] as const;
+
+function progressLabel(participant: Participant) {
+  if (participant.certificate === "Terbit") return "Selesai";
+  if (participant.score !== null) return "Evaluasi";
+  if (participant.attendance > 0) return "Pelatihan Berjalan";
+  if (participant.payment === "Lunas") return "Siap Pelatihan";
+  return "Administrasi";
+}
+
+function csvCell(value: string | number | null) {
+  const text = value === null ? "" : String(value);
+  return `"${text.replace(/"/g, '""')}"`;
+}
 
 export function ProgramOperations({
   programName,
   programCode,
-  participantCount,
-  paidCount,
+  participants,
 }: ProgramOperationsProps) {
-  const unpaidCount = Math.max(0, participantCount - paidCount);
+  const participantCount = participants.length;
+  const paidCount = participants.filter(
+    (participant) => participant.payment === "Lunas",
+  ).length;
+  const pendingCount = Math.max(0, participantCount - paidCount);
+  const averageAttendance = participantCount
+    ? Math.round(
+        participants.reduce(
+          (sum, participant) => sum + participant.attendance,
+          0,
+        ) / participantCount,
+      )
+    : 0;
+
+  function downloadCsv() {
+    const header = [
+      "ID Peserta",
+      "Nama",
+      "Pembayaran",
+      "Kehadiran",
+      "Nilai",
+      "Sertifikat",
+      "Progres",
+    ];
+
+    const rows = participants.map((participant) => [
+      participant.id,
+      participant.name,
+      participant.payment,
+      `${participant.attendance}%`,
+      participant.score,
+      participant.certificate,
+      progressLabel(participant),
+    ]);
+
+    const csv = [header, ...rows]
+      .map((row) => row.map((value) => csvCell(value)).join(","))
+      .join("\n");
+
+    const blob = new Blob([csv], {
+      type: "text/csv;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+
+    anchor.href = url;
+    anchor.download = `${programCode.toLowerCase()}-rekap.csv`;
+    anchor.click();
+
+    URL.revokeObjectURL(url);
+  }
 
   return (
     <section className="program-operations">
@@ -27,19 +87,52 @@ export function ProgramOperations({
           <small>OPERASIONAL PROGRAM</small>
           <h2>Pelatihan 4 hari, pembayaran, dan absensi</h2>
           <p>
-            Struktur kerja untuk {programName} ({programCode}). Data produksi
-            akan diisi setelah API operasional diaktifkan.
+            Struktur operasional {programName} ({programCode}) tanpa membuat
+            nominal, jadwal, atau data kehadiran yang belum resmi.
           </p>
         </div>
-        <span>UI READY</span>
+
+        <div className="program-operation-actions">
+          <button type="button" onClick={() => window.print()}>
+            Cetak / PDF
+          </button>
+          <button type="button" onClick={downloadCsv}>
+            CSV
+          </button>
+        </div>
+      </div>
+
+      <div className="program-operation-stats">
+        <article>
+          <small>Peserta</small>
+          <strong>{participantCount}</strong>
+          <span>terdaftar pada data demo</span>
+        </article>
+        <article>
+          <small>Lunas</small>
+          <strong>{paidCount}</strong>
+          <span>status pembayaran</span>
+        </article>
+        <article>
+          <small>Belum Lunas</small>
+          <strong>{pendingCount}</strong>
+          <span>termasuk status menunggu</span>
+        </article>
+        <article>
+          <small>Rata-rata Kehadiran</small>
+          <strong>{participantCount ? `${averageAttendance}%` : "—"}</strong>
+          <span>dari data yang tersedia</span>
+        </article>
       </div>
 
       <div className="training-day-grid">
-        {trainingDays.map((item) => (
-          <article key={item.day}>
-            <span>{item.day}</span>
-            <strong>{item.focus}</strong>
-            <small>Belum ada sesi produksi</small>
+        {trainingDays.map((day, index) => (
+          <article key={day}>
+            <span>{day}</span>
+            <strong>Sesi {index + 1}</strong>
+            <small>
+              Jadwal, token QR, dan status sesi menunggu data batch resmi.
+            </small>
           </article>
         ))}
       </div>
@@ -56,36 +149,40 @@ export function ProgramOperations({
             </span>
           </div>
 
+          <div className="payment-config-grid">
+            <div>
+              <small>Tarif Batch</small>
+              <strong>Belum ditetapkan</strong>
+            </div>
+            <div>
+              <small>Metode</small>
+              <strong>Menunggu keputusan resmi</strong>
+            </div>
+            <div>
+              <small>Cicilan</small>
+              <strong>Didukung oleh struktur sistem</strong>
+            </div>
+          </div>
+
           <div className="payment-flow">
             <div>
               <span>01</span>
               <strong>Belum Bayar</strong>
-              <small>Tagihan peserta dibuat dari pendaftaran batch.</small>
+              <small>Tagihan dibuat ketika tarif batch sudah resmi.</small>
             </div>
             <div>
               <span>02</span>
               <strong>Cicil</strong>
-              <small>Setiap pembayaran dicatat sebagai transaksi terpisah.</small>
+              <small>
+                Setiap transaksi dicatat terpisah agar saldo dan riwayat jelas.
+              </small>
             </div>
             <div>
               <span>03</span>
               <strong>Lunas</strong>
-              <small>Status berubah setelah total pembayaran terpenuhi.</small>
-            </div>
-          </div>
-
-          <div className="payment-quick-stats">
-            <div>
-              <small>Total peserta</small>
-              <strong>{participantCount}</strong>
-            </div>
-            <div>
-              <small>Lunas</small>
-              <strong>{paidCount}</strong>
-            </div>
-            <div>
-              <small>Belum lunas</small>
-              <strong>{unpaidCount}</strong>
+              <small>
+                Status berubah setelah total pembayaran memenuhi tagihan.
+              </small>
             </div>
           </div>
         </article>
@@ -94,19 +191,19 @@ export function ProgramOperations({
           <div className="operations-card-head">
             <div>
               <small>ABSENSI QR</small>
-              <h3>Empat sesi harian</h3>
+              <h3>Rekap empat hari</h3>
             </div>
-            <span>QR + Form</span>
+            <span>QR + Google Form</span>
           </div>
 
           <div className="qr-session-list">
-            {trainingDays.map((item, index) => (
-              <div key={item.day}>
+            {trainingDays.map((day, index) => (
+              <div key={day}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
-                  <strong>{item.day}</strong>
+                  <strong>{day}</strong>
                   <small>
-                    Token sesi dan QR dibuat ketika integrasi backend aktif.
+                    QR dan token sesi dibuat setelah jadwal resmi tersedia.
                   </small>
                 </div>
                 <b>Belum aktif</b>
@@ -115,7 +212,7 @@ export function ProgramOperations({
           </div>
 
           <div className="qr-flow-note">
-            <strong>Alur yang disiapkan</strong>
+            <strong>Alur input</strong>
             <p>
               QR → Google Form → Google Sheets / Apps Script → Laravel API →
               database PODH → dashboard admin.
@@ -124,20 +221,88 @@ export function ProgramOperations({
         </article>
       </div>
 
+      <section className="participant-operation-panel">
+        <div className="participant-operation-head">
+          <div>
+            <small>REKAP PESERTA</small>
+            <h3>Pembayaran, absensi 4 hari, dan progres</h3>
+          </div>
+          <span>{participantCount} peserta</span>
+        </div>
+
+        <div className="participant-operation-table-wrap">
+          <table className="participant-operation-table">
+            <thead>
+              <tr>
+                <th>Peserta</th>
+                <th>Pembayaran</th>
+                <th>Hari 1</th>
+                <th>Hari 2</th>
+                <th>Hari 3</th>
+                <th>Hari 4</th>
+                <th>Kehadiran</th>
+                <th>Nilai</th>
+                <th>Progres</th>
+              </tr>
+            </thead>
+            <tbody>
+              {participants.length ? (
+                participants.map((participant) => (
+                  <tr key={participant.id}>
+                    <td>
+                      <strong>{participant.name}</strong>
+                      <small>{participant.id}</small>
+                    </td>
+                    <td>
+                      <span className="ops-status">{participant.payment}</span>
+                    </td>
+                    {trainingDays.map((day) => (
+                      <td key={`${participant.id}-${day}`}>
+                        <span className="ops-empty">—</span>
+                      </td>
+                    ))}
+                    <td>{participant.attendance}%</td>
+                    <td>{participant.score ?? "—"}</td>
+                    <td>
+                      <span className="ops-progress">
+                        {progressLabel(participant)}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={9} className="participant-operation-empty">
+                    Belum ada peserta pada program ini.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <p className="participant-operation-note">
+          Kolom Hari 1–4 sengaja belum diisi dari persentase kehadiran agar
+          sistem tidak mengarang data sesi. Nanti setiap hari berasal dari
+          record absensi sebenarnya.
+        </p>
+      </section>
+
       <div className="operations-print-row">
         <div>
           <small>OUTPUT ADMIN</small>
-          <strong>Rekap siap dicetak</strong>
+          <strong>Rekap dapat dicetak sekarang</strong>
           <p>
-            Daftar peserta, pembayaran, absensi Hari 1–4, dan rekap program
-            nantinya dapat diekspor setelah sumber data produksi tersedia.
+            Tombol Cetak / PDF memakai fitur print browser. CSV berisi rekap
+            peserta yang tampil pada dashboard. XLSX ditambahkan setelah modul
+            data produksi tersedia.
           </p>
         </div>
         <div className="operations-print-tags">
           <span>PRINT</span>
           <span>PDF</span>
-          <span>EXCEL</span>
           <span>CSV</span>
+          <span>XLSX NANTI</span>
         </div>
       </div>
     </section>

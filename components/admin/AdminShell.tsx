@@ -385,12 +385,7 @@ export function AdminShell() {
                 <ProgramOperations
                   programName={selectedProgram.name}
                   programCode={selectedProgram.code}
-                  participantCount={selectedProgram.participants.length}
-                  paidCount={
-                    selectedProgram.participants.filter(
-                      (participant) => participant.payment === "Lunas",
-                    ).length
-                  }
+                  participants={selectedProgram.participants}
                 />
 
                 <section className="participant-panel">
