@@ -2,7 +2,7 @@ import "./admin.css";
 import { AdminShell } from "@/components/admin/AdminShell";
 
 export const metadata = {
-  title: "Admin Pelatihan",
+  title: "Admin PODH",
   robots: {
     index: false,
     follow: false,

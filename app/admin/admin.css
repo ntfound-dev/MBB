@@ -714,3 +714,132 @@
 .privacy-box > span {
   background: #171717;
 }
+
+/* PODH ADMIN CONTROL CENTER V2 */
+.admin-module-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-module-hero,
+.admin-module-grid article,
+.admin-module-note {
+  border: 1px solid #dce1dd;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.admin-module-hero { padding: 26px; }
+
+.admin-module-hero > span,
+.admin-module-grid small {
+  color: #78837d;
+  font-size: .62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.admin-module-hero h2 { margin: 8px 0; font-size: 1.7rem; }
+
+.admin-module-hero p,
+.admin-module-grid p,
+.admin-module-note p {
+  margin: 0;
+  color: #66736b;
+  font-size: .74rem;
+  line-height: 1.6;
+}
+
+.admin-module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.admin-module-grid article { padding: 22px; }
+.admin-module-grid strong { display: block; margin: 10px 0 7px; font-size: 1rem; }
+.admin-module-note { padding: 18px 20px; background: #edf4ef; }
+.admin-module-note strong { display: block; margin-bottom: 5px; font-size: .76rem; }
+
+@media (max-width: 720px) {
+  .admin-module-grid { grid-template-columns: 1fr; }
+}
+
+/* PODH ADMIN CONTROL CENTER V3 */
+.admin-module-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-module-hero,
+.admin-module-grid article,
+.admin-module-note {
+  border: 1px solid #ddd9cf;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.admin-module-hero {
+  padding: 26px;
+  border-top: 3px solid #f2b719;
+}
+
+.admin-module-hero > span,
+.admin-module-grid small {
+  color: #8b6b12;
+  font-size: .62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.admin-module-hero h2 {
+  margin: 8px 0;
+  color: #171717;
+  font-size: 1.7rem;
+}
+
+.admin-module-hero p,
+.admin-module-grid p,
+.admin-module-note p {
+  margin: 0;
+  color: #66625b;
+  font-size: .74rem;
+  line-height: 1.6;
+}
+
+.admin-module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.admin-module-grid article {
+  padding: 22px;
+}
+
+.admin-module-grid strong {
+  display: block;
+  margin: 10px 0 7px;
+  color: #171717;
+  font-size: 1rem;
+}
+
+.admin-module-note {
+  padding: 18px 20px;
+  background: #fbf5df;
+}
+
+.admin-module-note strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #171717;
+  font-size: .76rem;
+}
+
+@media (max-width: 720px) {
+  .admin-module-grid {
+    grid-template-columns: 1fr;
+  }
+}

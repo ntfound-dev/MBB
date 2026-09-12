@@ -1,4 +1,4 @@
-export type ProgramKey = "welder" | "crane" | "k3";
+export type ProgramKey = "welder" | "crane" | "k3" | "rigger";
 
 export type PaymentStatus = "Lunas" | "Menunggu";
 export type TrainingStatus =
@@ -133,6 +133,14 @@ const season1: Season = {
         },
       ],
     },
+    {
+      key: "rigger",
+      name: "Rigger",
+      code: "S1-RIG",
+      date: "Belum ditentukan",
+      trainingStatus: "Pendaftaran",
+      participants: [],
+    },
   ],
 };
 
@@ -166,6 +174,14 @@ const season2: Season = {
       trainingStatus: "Pendaftaran",
       participants: [],
     },
+    {
+      key: "rigger",
+      name: "Rigger",
+      code: "S2-RIG",
+      date: "Belum ditentukan",
+      trainingStatus: "Pendaftaran",
+      participants: [],
+    },
   ],
 };
 
@@ -175,12 +191,15 @@ export function getSeasonSummary(season: Season) {
   const participants = season.programs.flatMap(
     (program) => program.participants,
   );
+
   const paid = participants.filter(
     (participant) => participant.payment === "Lunas",
   ).length;
+
   const scored = participants.filter(
     (participant) => participant.score !== null,
   );
+
   const certificates = participants.filter(
     (participant) => participant.certificate === "Terbit",
   ).length;

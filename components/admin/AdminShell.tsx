@@ -6,10 +6,28 @@ import {
   mockSeasons,
   type ProgramKey,
 } from "@/lib/mock-data";
+import {
+  AdminModulePanel,
+  type AdminModuleKey,
+} from "@/components/admin/AdminModulePanel";
 
-type View = "season" | ProgramKey;
+type View = "season" | ProgramKey | AdminModuleKey;
 
-const programOrder: ProgramKey[] = ["welder", "crane", "k3"];
+const programOrder: ProgramKey[] = ["welder", "crane", "k3", "rigger"];
+
+const adminModules: { key: AdminModuleKey; label: string }[] = [
+  { key: "members", label: "Keanggotaan" },
+  { key: "payments", label: "Pembayaran" },
+  { key: "attendance", label: "Absensi" },
+  { key: "requests", label: "Permintaan" },
+  { key: "activities", label: "Kegiatan" },
+  { key: "alumni", label: "Alumni" },
+  { key: "reports", label: "Laporan" },
+];
+
+function isAdminModule(view: View): view is AdminModuleKey {
+  return adminModules.some((item) => item.key === view);
+}
 
 function Badge({ children }: { children: React.ReactNode }) {
   return <span className="season-badge">{children}</span>;
@@ -26,7 +44,7 @@ export function AdminShell() {
   const summary = getSeasonSummary(season);
 
   const selectedProgram =
-    view === "season"
+    view === "season" || isAdminModule(view)
       ? null
       : season.programs.find((program) => program.key === view) ?? null;
 
@@ -84,8 +102,24 @@ export function AdminShell() {
               setQuery("");
             }}
           >
-            Ringkasan Season
+            Ringkasan Pelatihan
           </button>
+
+          <span className="season-nav-label">Operasional</span>
+
+          {adminModules.map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              className={view === item.key ? "active" : ""}
+              onClick={() => {
+                setView(item.key);
+                setQuery("");
+              }}
+            >
+              <span>{item.label}</span>
+            </button>
+          ))}
 
           <span className="season-nav-label">Program</span>
 
@@ -123,13 +157,21 @@ export function AdminShell() {
         <header className="season-topbar">
           <div>
             <span className="season-kicker">
-              {view === "season" ? "Season Dashboard" : "Program Dashboard"}
+              {view === "season" ? "Admin Dashboard" : isAdminModule(view) ? "Modul Operasional" : "Program Dashboard"}
             </span>
-            <h1>{view === "season" ? season.name : selectedProgram?.name}</h1>
+            <h1>
+              {view === "season"
+                ? "Pusat Operasional PODH"
+                : isAdminModule(view)
+                  ? adminModules.find((item) => item.key === view)?.label
+                  : selectedProgram?.name}
+            </h1>
             <p>
               {view === "season"
-                ? season.subtitle
-                : `${selectedProgram?.code} • ${selectedProgram?.date}`}
+                ? `${season.name} • ${season.subtitle}`
+                : isAdminModule(view)
+                  ? "UI siap • koneksi data produksi menyusul"
+                  : `${selectedProgram?.code} • ${selectedProgram?.date}`}
             </p>
           </div>
 
@@ -139,8 +181,8 @@ export function AdminShell() {
             <div className="season-user">
               <span>S</span>
               <div>
-                <strong>Sekretaris</strong>
-                <small>Admin</small>
+                <strong>Admin PODH</strong>
+                <small>Role-based access</small>
               </div>
             </div>
           </div>
@@ -167,7 +209,9 @@ export function AdminShell() {
           ))}
         </div>
 
-        {view === "season" ? (
+        {isAdminModule(view) ? (
+          <AdminModulePanel module={view} />
+        ) : view === "season" ? (
           <>
             <section className="season-stats">
               <article>
