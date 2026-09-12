@@ -1686,3 +1686,134 @@
     display: none !important;
   }
 }
+
+/* PODH MEMBERSHIP REPORTS V1 */
+.member-status-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.member-status-flow article {
+  min-height: 92px;
+  padding: 14px;
+  border: 1px solid #e0dcd3;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.member-status-flow span,
+.member-status-flow strong {
+  display: block;
+}
+
+.member-status-flow span {
+  color: #9d6b00;
+  font-size: .58rem;
+  font-weight: 900;
+}
+
+.member-status-flow strong {
+  margin-top: 12px;
+  color: #171717;
+  font-size: .68rem;
+  line-height: 1.35;
+}
+
+.report-group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.report-group-grid article {
+  padding: 18px;
+  border: 1px solid #e0dcd3;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.report-group-grid small,
+.report-output-panel small {
+  color: #8b6b12;
+  font-size: .59rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.report-group-grid h3,
+.report-output-panel h3 {
+  margin: 7px 0 9px;
+  color: #171717;
+  font-size: .9rem;
+}
+
+.report-group-grid ul {
+  margin: 0;
+  padding-left: 16px;
+  color: #625d55;
+  font-size: .64rem;
+  line-height: 1.75;
+}
+
+.report-output-panel {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #e2d5a8;
+  border-radius: 9px;
+  background: #fbf5df;
+}
+
+.report-output-panel p {
+  margin: 0;
+  max-width: 680px;
+  color: #746d63;
+  font-size: .64rem;
+  line-height: 1.5;
+}
+
+.report-output-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.report-output-tags span {
+  padding: 7px 9px;
+  border: 1px solid #e5cf86;
+  border-radius: 7px;
+  background: #fff;
+  color: #765500;
+  font-size: .57rem;
+  font-weight: 900;
+}
+
+@media (max-width: 1100px) {
+  .member-status-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .report-group-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .member-status-flow,
+  .report-group-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-output-panel {
+    display: block;
+  }
+
+  .report-output-tags {
+    margin-top: 12px;
+    justify-content: flex-start;
+  }
+}

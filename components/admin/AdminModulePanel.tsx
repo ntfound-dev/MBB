@@ -324,6 +324,144 @@ function AlumniModule() {
   );
 }
 
+function MembershipModule() {
+  const statuses = [
+    "Registered",
+    "Profile Incomplete",
+    "Pending Verification",
+    "Verified",
+    "Rejected / Suspended",
+  ];
+
+  return (
+    <section className="ops-module-detail">
+      <div className="admin-module-hero">
+        <span>KEANGGOTAAN</span>
+        <h2>Verifikasi anggota dan identitas PODH</h2>
+        <p>
+          Google login hanya untuk autentikasi. Status anggota ditentukan dari
+          profil dan verifikasi admin, bukan otomatis saat pengguna masuk.
+        </p>
+      </div>
+
+      <Toolbar label="Administrasi anggota" />
+
+      <div className="member-status-flow">
+        {statuses.map((status, index) => (
+          <article key={status}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{status}</strong>
+          </article>
+        ))}
+      </div>
+
+      <div className="ops-definition-grid">
+        <article>
+          <small>IDENTITAS</small>
+          <h3>Data inti anggota</h3>
+          <ul>
+            <li>Nama lengkap</li>
+            <li>NIK 16 digit</li>
+            <li>Nomor HP / WhatsApp</li>
+            <li>Tanggal lahir</li>
+            <li>Alamat domisili</li>
+            <li>ID anggota setelah terverifikasi</li>
+          </ul>
+        </article>
+
+        <article>
+          <small>PRIVASI</small>
+          <h3>Data sensitif tetap privat</h3>
+          <ul>
+            <li>NIK tidak ditampilkan di website publik</li>
+            <li>NIK disimpan terenkripsi pada backend</li>
+            <li>Hash terpisah digunakan untuk pemeriksaan duplikasi</li>
+            <li>Dokumen identitas memakai penyimpanan privat saat diaktifkan</li>
+            <li>Perubahan verifikasi masuk audit log</li>
+          </ul>
+        </article>
+      </div>
+
+      <EmptyTable
+        columns={["ID Anggota", "Nama", "Kontak", "Status", "Verifikasi"]}
+        message="Belum ada data anggota produksi yang ditampilkan di modul ini."
+      />
+    </section>
+  );
+}
+
+function ReportsModule() {
+  const reportGroups = [
+    {
+      title: "Keanggotaan",
+      items: ["Daftar anggota", "Status verifikasi", "Rekap pendaftar"],
+    },
+    {
+      title: "Pelatihan",
+      items: ["Daftar peserta", "Absensi Hari 1–4", "Nilai dan progres"],
+    },
+    {
+      title: "Keuangan",
+      items: ["Pembayaran", "Cicilan", "Sisa tagihan", "Kuitansi"],
+    },
+    {
+      title: "Organisasi",
+      items: ["Kegiatan", "Rapat", "Permintaan perusahaan", "Alumni"],
+    },
+  ];
+
+  return (
+    <section className="ops-module-detail">
+      <div className="admin-module-hero">
+        <span>LAPORAN</span>
+        <h2>Pusat cetak dan ekspor data PODH</h2>
+        <p>
+          Laporan dirancang untuk print, PDF, Excel, dan CSV. Hasil produksi
+          baru diaktifkan ketika sumber data backend tersedia.
+        </p>
+      </div>
+
+      <Toolbar label="Pusat laporan" />
+
+      <div className="report-group-grid">
+        {reportGroups.map((group) => (
+          <article key={group.title}>
+            <small>KATEGORI</small>
+            <h3>{group.title}</h3>
+            <ul>
+              {group.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <section className="report-output-panel">
+        <div>
+          <small>FORMAT OUTPUT</small>
+          <h3>Dokumen kerja, bukan screenshot</h3>
+          <p>
+            Print dan PDF untuk dokumen resmi; Excel dan CSV untuk pengolahan
+            data serta rekap administratif.
+          </p>
+        </div>
+        <div className="report-output-tags">
+          <span>PRINT</span>
+          <span>PDF</span>
+          <span>EXCEL</span>
+          <span>CSV</span>
+        </div>
+      </section>
+
+      <EmptyTable
+        columns={["Laporan", "Periode", "Format", "Dibuat Oleh", "Status"]}
+        message="Belum ada riwayat laporan produksi."
+      />
+    </section>
+  );
+}
+
 function GenericModulePanel({ module }: { module: keyof typeof genericModules }) {
   const item = genericModules[module];
 
@@ -359,9 +497,11 @@ function GenericModulePanel({ module }: { module: keyof typeof genericModules })
 }
 
 export function AdminModulePanel({ module }: { module: AdminModuleKey }) {
+  if (module === "members") return <MembershipModule />;
   if (module === "requests") return <RequestsModule />;
   if (module === "activities") return <ActivitiesModule />;
   if (module === "alumni") return <AlumniModule />;
+  if (module === "reports") return <ReportsModule />;
 
   return <GenericModulePanel module={module} />;
 }
