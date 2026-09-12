@@ -17,10 +17,10 @@ export default function MemberRegistrationPage() {
         <section className="member-hero">
           <div className="podh-shell">
             <span className="eyebrow eyebrow-light">KEANGGOTAAN PODH</span>
-            <h1>Mulai dari akun anggota.</h1>
+            <h1>Lengkapi data keanggotaan.</h1>
             <p>
-              Keanggotaan PODH menjadi pintu masuk sebelum anggota mengikuti
-              program kompetensi dan pelatihan.
+              Masuk dengan Google lebih dulu, kemudian isi identitas anggota
+              untuk diperiksa oleh admin PODH.
             </p>
           </div>
         </section>
@@ -31,39 +31,40 @@ export default function MemberRegistrationPage() {
 
             <aside className="member-flow-card">
               <span className="eyebrow">ALUR ANGGOTA</span>
-              <h2>Dari pendaftaran sampai aktif.</h2>
+              <h2>Dari akun sampai aktif.</h2>
 
               <ol>
                 <li>
                   <span>01</span>
                   <div>
-                    <strong>Daftar akun PODH</strong>
-                    <small>Lengkapi identitas dan data dasar anggota.</small>
+                    <strong>Masuk dengan Google</strong>
+                    <small>Google hanya dipakai untuk autentikasi akun.</small>
                   </div>
                 </li>
 
                 <li>
                   <span>02</span>
                   <div>
-                    <strong>Verifikasi data</strong>
-                    <small>Admin memeriksa kelengkapan dan validitas.</small>
+                    <strong>Lengkapi identitas</strong>
+                    <small>Isi data keanggotaan PODH dengan benar.</small>
                   </div>
                 </li>
 
                 <li>
                   <span>03</span>
                   <div>
-                    <strong>Keanggotaan aktif</strong>
-                    <small>Akun mendapatkan status anggota PODH.</small>
+                    <strong>Verifikasi admin</strong>
+                    <small>Admin memeriksa kelengkapan dan validitas data.</small>
                   </div>
                 </li>
 
                 <li>
                   <span>04</span>
                   <div>
-                    <strong>Daftar program</strong>
+                    <strong>Keanggotaan aktif</strong>
                     <small>
-                      Setelah aktif, anggota dapat memilih program pelatihan.
+                      Setelah disetujui, anggota memperoleh ID PODH dan akses
+                      program sesuai ketentuan.
                     </small>
                   </div>
                 </li>

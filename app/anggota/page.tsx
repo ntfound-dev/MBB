@@ -1,4 +1,6 @@
+import { cookies } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import {
   FiBookOpen,
   FiCheckCircle,
@@ -7,12 +9,66 @@ import {
 } from "react-icons/fi";
 import { AppFooter } from "@/components/AppFooter";
 import { Header } from "@/components/Header";
+import { MemberLogoutButton } from "@/components/MemberLogoutButton";
+import { PODH_AUTH_COOKIE, podhApiUrl } from "@/lib/podh-api";
 
 export const metadata = {
   title: "Akun Anggota PODH",
 };
 
-export default function MemberAccountPage() {
+type UserPayload = {
+  name: string;
+  email: string;
+  status: string;
+  member: null | {
+    member_number: string | null;
+    full_name: string;
+    phone: string;
+    birth_date: string;
+    address: string;
+    verification_status: string;
+    verified_at: string | null;
+  };
+};
+
+function statusLabel(status: string) {
+  if (status === "verified") return "Terverifikasi";
+  if (status === "rejected") return "Perlu Perbaikan";
+  if (status === "suspended") return "Ditangguhkan";
+  if (status === "pending_verification") return "Menunggu Verifikasi";
+  return "Profil Belum Lengkap";
+}
+
+export default async function MemberAccountPage() {
+  const token = (await cookies()).get(PODH_AUTH_COOKIE)?.value;
+
+  if (!token) {
+    redirect("/anggota/masuk");
+  }
+
+  const response = await fetch(podhApiUrl("/me"), {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    cache: "no-store",
+  });
+
+  if (response.status === 401) {
+    redirect("/anggota/masuk");
+  }
+
+  if (!response.ok) {
+    throw new Error("Gagal memuat akun anggota PODH.");
+  }
+
+  const data = (await response.json()) as { user: UserPayload };
+  const user = data.user;
+  const member = user.member;
+  const verificationStatus =
+    member?.verification_status || user.status || "registered";
+  const verified = verificationStatus === "verified";
+
   return (
     <>
       <Header />
@@ -21,19 +77,21 @@ export default function MemberAccountPage() {
         <section className="podh-shell member-dashboard">
           <div className="member-dashboard-heading">
             <div>
-              <span className="eyebrow">PREVIEW AKUN ANGGOTA</span>
-              <h1>Akun PODH.</h1>
-              <p>
-                Satu akun untuk identitas anggota, status keanggotaan, dan
-                program kompetensi yang diikuti.
-              </p>
+              <span className="eyebrow">AKUN ANGGOTA</span>
+              <h1>{member?.full_name || user.name}</h1>
+              <p>{user.email}</p>
+              {member?.member_number && (
+                <p>
+                  <strong>ID Anggota: {member.member_number}</strong>
+                </p>
+              )}
             </div>
 
             <div className="member-status-badge">
-              <FiClock />
+              {verified ? <FiCheckCircle /> : <FiClock />}
               <span>
                 <small>Status</small>
-                <strong>Menunggu Verifikasi</strong>
+                <strong>{statusLabel(verificationStatus)}</strong>
               </span>
             </div>
           </div>
@@ -43,14 +101,25 @@ export default function MemberAccountPage() {
               <FiUser />
               <span>PROFIL</span>
               <h2>Profil Anggota</h2>
-              <p>Identitas, kontak, domisili, dan bidang profesi.</p>
+              <p>
+                {member
+                  ? `${member.phone} • ${member.address}`
+                  : "Data keanggotaan belum dilengkapi."}
+              </p>
+              {!member && (
+                <Link href="/anggota/daftar">Lengkapi profil</Link>
+              )}
             </article>
 
             <article>
               <FiCheckCircle />
               <span>KEANGGOTAAN</span>
-              <h2>Status Anggota</h2>
-              <p>Status verifikasi dan informasi keanggotaan PODH.</p>
+              <h2>{statusLabel(verificationStatus)}</h2>
+              <p>
+                {verified
+                  ? "Data telah disetujui admin PODH."
+                  : "Akses penuh dibuka setelah verifikasi admin selesai."}
+              </p>
             </article>
 
             <article>
@@ -58,7 +127,9 @@ export default function MemberAccountPage() {
               <span>PROGRAM</span>
               <h2>Program Saya</h2>
               <p>
-                Setelah akun aktif, program yang diikuti akan muncul di sini.
+                {verified
+                  ? "Akun sudah dapat melanjutkan ke program yang tersedia."
+                  : "Program dibuka setelah keanggotaan aktif."}
               </p>
             </article>
           </div>
@@ -66,16 +137,29 @@ export default function MemberAccountPage() {
           <section className="member-program-gate">
             <div>
               <span className="eyebrow eyebrow-light">AKSES PROGRAM</span>
-              <h2>Program dibuka setelah keanggotaan aktif.</h2>
+              <h2>
+                {verified
+                  ? "Keanggotaan aktif."
+                  : "Menunggu keanggotaan aktif."}
+              </h2>
               <p>
-                Anggota yang sudah diverifikasi dapat memilih program
-                kompetensi dari katalog PODH.
+                {verified
+                  ? "Silakan lihat program kompetensi PODH yang tersedia."
+                  : "Admin akan memeriksa data sebelum akses program dibuka."}
               </p>
             </div>
 
-            <Link className="podh-button podh-button-accent" href="/pelatihan">
-              Lihat Program
-            </Link>
+            <div className="member-login-actions">
+              {verified && (
+                <Link
+                  className="podh-button podh-button-accent"
+                  href="/pelatihan"
+                >
+                  Lihat Program
+                </Link>
+              )}
+              <MemberLogoutButton />
+            </div>
           </section>
         </section>
       </main>
