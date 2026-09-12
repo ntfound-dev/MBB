@@ -10,6 +10,7 @@ import {
   AdminModulePanel,
   type AdminModuleKey,
 } from "@/components/admin/AdminModulePanel";
+import { ProgramOperations } from "@/components/admin/ProgramOperations";
 
 type View = "season" | ProgramKey | AdminModuleKey;
 
@@ -380,6 +381,17 @@ export function AdminShell() {
                     </strong>
                   </article>
                 </section>
+
+                <ProgramOperations
+                  programName={selectedProgram.name}
+                  programCode={selectedProgram.code}
+                  participantCount={selectedProgram.participants.length}
+                  paidCount={
+                    selectedProgram.participants.filter(
+                      (participant) => participant.payment === "Lunas",
+                    ).length
+                  }
+                />
 
                 <section className="participant-panel">
                   <div className="participant-panel-head">
